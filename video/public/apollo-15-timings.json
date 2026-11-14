@@ -2,9 +2,9 @@
  "voice": "en-US-AriaNeural",
  "lines": [
   {
-   "text": "July 30, 1971. Apollo 15 makes a moon landing near Apennine mountains, using a small collapsible car.",
+   "text": "July 30, 1971. Apollo 15 makes a moon landing near Apennine mountains, bringing a small collapsible car.",
    "start": 0.102625,
-   "end": 9.223707,
+   "end": 9.223666,
    "words": [
     {
      "t": 0.102625,
@@ -23,62 +23,62 @@
     },
     {
      "t": 4.657875,
-     "d": 0.223666,
+     "d": 0.236833,
      "w": "makes"
     },
     {
-     "t": 4.89475,
+     "t": 4.907875,
      "d": 0.065791,
      "w": "a"
     },
     {
-     "t": 4.973666,
+     "t": 4.986833,
      "d": 0.289458,
      "w": "moon"
     },
     {
-     "t": 5.276333,
+     "t": 5.289458,
      "d": 0.421041,
      "w": "landing"
     },
     {
-     "t": 5.710541,
+     "t": 5.723666,
      "d": 0.25,
      "w": "near"
     },
     {
-     "t": 5.973666,
-     "d": 0.434208,
+     "t": 5.986833,
+     "d": 0.447375,
      "w": "Apennine"
     },
     {
-     "t": 6.421041,
-     "d": 0.539458,
+     "t": 6.447375,
+     "d": 0.565791,
      "w": "mountains,"
     },
     {
      "t": 7.328958,
-     "d": 0.328958,
-     "w": "using"
+     "d": 0.315791,
+     "w": "bringing"
     },
     {
-     "t": 7.671041,
+     "t": 7.657875,
      "d": 0.065791,
      "w": "a"
     },
     {
-     "t": 7.75,
+     "t": 7.736833,
      "d": 0.35525,
      "w": "small"
     },
     {
-     "t": 8.118416,
+     "t": 8.10525,
      "d": 0.631583,
      "w": "collapsible"
     },
     {
-     "t": 8.763166,
-     "d": 0.460541,
+     "t": 8.75,
+     "d": 0.473666,
      "w": "car."
     }
    ]

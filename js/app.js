@@ -646,6 +646,7 @@ function updateStoryCamera() {
   if (n !== activeChapter) {
     activeChapter = n;
     sections().forEach((s, j) => s.classList.toggle('in', j === n));
+    document.body.classList.toggle('title-chapter', !!chapters[n].kind); // planet labels would collide with the big title text
     document.querySelectorAll('#dots button').forEach((d, j) => d.toggleAttribute('aria-current', j === n));
     const c = shots[n];
     setWorld(c.world || null);
