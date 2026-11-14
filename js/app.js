@@ -226,6 +226,7 @@ function openPanel(a) {
   const lat = `${Math.abs(a.lat).toFixed(2)}°${a.lat >= 0 ? 'N' : 'S'}`, lon = `${Math.abs(a.lon).toFixed(2)}°${a.lon >= 0 ? 'E' : 'W'}`;
   showPanel(`<div class="type">${worlds[a.world].name} · ${a.type}</div><h2>${a.name}</h2>`, `
     <span class="badge ${a.statusKind === 'active' ? 'active' : ''}">${a.status}</span>
+    <figure class="photo"><img src="${a.photo}" alt="${a.photoCaption}"><figcaption>${a.photoCaption}</figcaption></figure>
     <div class="video">${videoHtml(a.video)}</div>
     <h3>Story</h3>
     <p class="story ${a.story ? '' : 'empty'}">${a.story || 'Story and narration coming soon.'}</p>
@@ -293,6 +294,7 @@ $('credits-btn').onclick = () => {
 // click (not drag) on a marker
 const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
 const pick = e => {
+  if (!current) return; // story chapters between worlds have nothing to click
   ndc.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
   ray.setFromCamera(ndc, camera);
   return ray.intersectObjects(bodies[current].markers)[0]?.object.userData.artifact;
@@ -361,19 +363,31 @@ function shotFor(spec) {
 }
 
 const chapters = storyChapters.map(c => ({ ...c, a: c.shot.startsWith('artifact:') ? byId[c.shot.split(':')[1]] : null }));
-function cardHtml(c) {
+const pad = n => String(n).padStart(2, '0');
+const years = artifacts.map(a => +a.landed.slice(-4));
+function cardHtml(c, i) {
+  const num = `<span class="num">${pad(i + 1)} / ${pad(chapters.length)}</span>`;
   if (c.a) {
-    const a = c.a;
-    return `<div class="type">${worlds[a.world].name} · ${a.landed.slice(-4)} · ${a.type}</div>
-      <h2>${a.name}</h2><p>${a.story || a.learned}</p><p class="dyk">${a.didYouKnow}</p>
-      <div class="actions"><button class="pill" data-open="${a.id}">Read the full file →</button></div>`;
+    const a = c.a, live = a.statusKind === 'active';
+    return `<figure class="photo"><img src="${a.photo}" alt="${a.photoCaption}" loading="lazy"><figcaption>${a.photoCaption}</figcaption></figure>
+      <div class="meta">${num}<span class="chip">${worlds[a.world].name}</span><span class="chip">${a.landed.slice(-4)}</span>
+        <span class="chip ${live ? 'live' : 'silent'}">${live ? 'Still working' : 'Silent'}</span></div>
+      <h2>${a.name}</h2><p class="lead">${a.story || a.learned}</p>
+      <div class="dyk"><b>Did you know?</b>${a.didYouKnow}</div>
+      <div class="actions"><button class="pill primary" data-open="${a.id}">Read the full file →</button></div>`;
   }
-  const tag = c.kind ? '' : `<div class="type">Chapter</div>`;
-  const extra = c.kind === 'intro' ? '<div class="scroll-cue" aria-hidden="true">↓ Scroll</div>'
-    : c.kind === 'outro' ? '<div class="actions"><button class="pill primary" data-explore>Explore freely</button><button class="pill" data-top>Back to the start</button></div>' : '';
-  return `${tag}<h2>${c.title}</h2><p>${c.text}</p>${extra}`;
+  if (c.kind === 'intro') return `<div class="kicker">NASA Space Apps Challenge 2026</div><h2>${c.title}</h2><p class="lead">${c.text}</p>
+      <ul class="stats"><li><b>${artifacts.length}</b>machines</li><li><b>${Object.keys(worlds).length}</b>worlds</li><li><b>${Math.min(...years)}–${Math.max(...years)}</b>landings</li></ul>
+      <div class="scroll-cue" aria-hidden="true"><span></span>Scroll to begin</div>`;
+  if (c.kind === 'outro') return `<h2>${c.title}</h2><p class="lead">${c.text}</p>
+      <div class="actions"><button class="pill primary" data-explore>Explore freely</button><button class="pill" data-top>Back to the start</button></div>`;
+  return `<div class="meta">${num}</div><h2>${c.title}</h2><p class="lead">${c.text}</p>`;
 }
-$('story').innerHTML = chapters.map(c => `<section class="chapter ${c.kind || ''}"><div class="card">${cardHtml(c)}</div></section>`).join('');
+$('story').innerHTML = chapters.map((c, i) => `<section class="chapter ${c.kind || ''} ${c.a ? 'artifact' : ''}"><div class="card">${cardHtml(c, i)}</div></section>`).join('');
+
+// chapter dots: jump anywhere in the story
+$('dots').innerHTML = chapters.map((c, i) => `<li><button data-i="${i}" aria-label="Chapter ${i + 1}: ${c.a ? c.a.name : c.title}"><span>${c.a ? c.a.name : c.title}</span></button></li>`).join('');
+$('dots').onclick = e => { const b = e.target.closest('button'); if (b) scrollTo({ top: b.dataset.i * innerHeight, behavior: reducedMotion ? 'auto' : 'smooth' }); };
 $('story').addEventListener('click', e => {
   const b = e.target.closest('button');
   if (!b) return;
@@ -418,6 +432,7 @@ function updateStoryCamera() {
   if (n !== activeChapter) {
     activeChapter = n;
     sections().forEach((s, j) => s.classList.toggle('in', j === n));
+    document.querySelectorAll('#dots button').forEach((d, j) => d.toggleAttribute('aria-current', j === n));
     const c = shots[n];
     setWorld(c.world || null);
     selected = c.artifact || null;

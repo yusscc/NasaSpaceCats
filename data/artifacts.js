@@ -45,6 +45,7 @@ export const credits = [
   'Mars map: NASA Viking MDIM 2.1 colorized mosaic, USGS (public domain)',
   'Moon map: NASA imagery via three.js examples',
   'Sun, planets, Saturn rings, star background: Solar System Scope (CC BY 4.0), via Wikimedia Commons',
+  'Artifact photos: NASA / NASA-JPL (public domain), via Wikimedia Commons',
   'Button icons: NASA LRO Moon nearside and NASA Viking Mars mosaic (public domain), via Wikimedia Commons',
 ];
 
@@ -57,6 +58,7 @@ export const artifacts = [
     builtTo: 'Prove that a spacecraft could land softly on the Moon, and dig into the soil with a robotic scoop to test whether the ground could hold up a crewed Apollo lander.',
     learned: 'The lunar soil was firm enough to land on. Surveyor 3 was the first spacecraft to dig a trench on the Moon, and its camera sent back thousands of pictures.',
     didYouKnow: 'In November 1969 the Apollo 12 crew landed close by, walked over to Surveyor 3, and cut off its camera and other parts to bring back to Earth. It is the only time humans have visited a robot on another world.',
+    photo: 'assets/photos/surveyor-3.jpg', photoCaption: "Apollo 12's Pete Conrad visits Surveyor 3, November 1969. Photo: NASA",
     story: '', video: '',
     sources: [
       { label: 'NSSDCA: Surveyor 3', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-035A' },
@@ -71,6 +73,7 @@ export const artifacts = [
     builtTo: 'Land Neil Armstrong and Buzz Aldrin on the Moon, then serve as the launch pad for the upper stage that carried them back to orbit.',
     learned: 'The crew brought back about 21.5 kg of Moon rock and soil. The laser retroreflector they set up lets observatories on Earth measure the distance to the Moon to within centimetres, which showed that the Moon is slowly drifting away from Earth (about 3.8 cm per year).',
     didYouKnow: 'A metal plaque on one of Eagle\'s legs is still there. It says the explorers "came in peace for all mankind."',
+    photo: 'assets/photos/apollo-11-eagle.jpg', photoCaption: 'Eagle on the Moon while Buzz Aldrin unpacks experiments, July 1969. Photo: NASA',
     story: '', video: '',
     sources: [
       { label: 'NSSDCA: Apollo 11 Lunar Module', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C' },
@@ -85,6 +88,7 @@ export const artifacts = [
     builtTo: 'Let astronauts David Scott and James Irwin drive kilometres away from their lander and carry more tools and samples. It ran on batteries.',
     learned: 'The rover took the crew to the edge of Hadley Rille and the Apennine mountains, about 28 km of driving in total. There they found the "Genesis Rock", a piece of the Moon\'s ancient crust about 4 billion years old.',
     didYouKnow: 'The crew parked the rover with its TV camera pointing at the lander, so people on Earth could watch the astronauts lift off from the Moon.',
+    photo: 'assets/photos/apollo-15-lrv.jpg', photoCaption: 'James Irwin with the lunar module and the rover, 1971. Photo: NASA',
     story: '', video: '',
     sources: [
       { label: 'NSSDCA: Apollo 15 Lunar Module / LRV', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C' },
@@ -99,6 +103,7 @@ export const artifacts = [
     builtTo: 'Become the first US spacecraft to work on the surface of Mars: take pictures, measure the weather, and run three biology experiments that searched the soil for signs of life.',
     learned: 'Viking 1 sent back the first colour pictures from the surface of Mars and recorded Martian weather for more than six years. Its life experiments gave puzzling results. Most scientists concluded the soil chemistry, not life, explained them.',
     didYouKnow: 'Viking 1 kept working for over six years, far beyond its planned 90 days.',
+    photo: 'assets/photos/viking-1.jpg', photoCaption: 'A Viking lander test model on Earth. Photo: NASA',
     story: '', video: '',
     sources: [
       { label: 'NSSDCA: Viking 1 Lander', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C' },
@@ -113,6 +118,7 @@ export const artifacts = [
     builtTo: 'Test whether a small wheeled robot could drive on Mars, and measure what nearby rocks were made of.',
     learned: 'Sojourner studied the chemistry of Martian rocks and helped show that this area had been shaped by ancient floods. It proved rovers could work on Mars, paving the way for every rover since.',
     didYouKnow: 'Sojourner is about the size of a microwave oven. It was planned to work for 7 days and kept going for about 12 weeks.',
+    photo: 'assets/photos/sojourner.jpg', photoCaption: 'Sojourner next to a rock, seen from the Pathfinder lander, 1997. Photo: NASA/JPL',
     story: '', video: '',
     sources: [
       { label: 'NASA Science: Mars Pathfinder', url: 'https://science.nasa.gov/mission/mars-pathfinder/' },
@@ -127,6 +133,7 @@ export const artifacts = [
     builtTo: 'Search rocks and soil for clues about whether liquid water was ever present on Mars.',
     learned: 'Opportunity found tiny round minerals nicknamed "blueberries" and rocks that could only have formed in water. That was strong evidence Meridiani Planum was once wet. It drove about 45 km, a record for a vehicle on another world at the time.',
     didYouKnow: 'Opportunity was planned to work for 90 Martian days. It lasted almost 15 years.',
+    photo: 'assets/photos/opportunity.jpg', photoCaption: "Artist's illustration of a Mars Exploration Rover like Opportunity. Image: NASA/JPL",
     story: '', video: '',
     sources: [
       { label: 'NASA Science: Spirit & Opportunity', url: 'https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/' },
@@ -141,6 +148,7 @@ export const artifacts = [
     builtTo: 'Show that powered, controlled flight is possible in the very thin air of Mars, which is about 1% as thick as Earth\'s.',
     learned: 'Ingenuity made the first powered flight on another planet on 19 April 2021. It went on to fly 72 times and scout routes for the Perseverance rover, showing that future missions can use aircraft to explore Mars.',
     didYouKnow: 'Ingenuity was planned for just 5 test flights. It flew 72.',
+    photo: 'assets/photos/ingenuity.jpg', photoCaption: 'Ingenuity on Mars, photographed by Perseverance, April 2021. Photo: NASA/JPL-Caltech',
     story: '', video: '',
     sources: [
       { label: 'NASA Science: Ingenuity Mars Helicopter', url: 'https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/' },
