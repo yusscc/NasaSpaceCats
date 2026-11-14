@@ -61,7 +61,7 @@ export const artifacts = [
     learned: 'The lunar soil was firm enough to land on. Surveyor 3 was the first spacecraft to dig a trench on the Moon, and its camera sent back thousands of pictures.',
     didYouKnow: 'In November 1969 the Apollo 12 crew landed close by, walked over to Surveyor 3, and cut off its camera and other parts to bring back to Earth. It is the only time humans have visited a robot on another world.',
     photo: 'assets/photos/surveyor-3.jpg', photoCaption: "Apollo 12's Pete Conrad visits Surveyor 3, November 1969. Photo: NASA",
-    story: '', video: '',
+    story: '', video: 'videos/surveyor-3.mp4',
     sources: [
       { label: 'NSSDCA: Surveyor 3', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-035A' },
       { label: 'NASA Science: Surveyor 3', url: 'https://science.nasa.gov/mission/surveyor-3/' },
@@ -91,7 +91,7 @@ export const artifacts = [
     learned: 'The rover took the crew to the edge of Hadley Rille and the Apennine mountains, about 28 km of driving in total. There they found the "Genesis Rock", a piece of the Moon\'s ancient crust about 4 billion years old.',
     didYouKnow: 'The crew parked the rover with its TV camera pointing at the lander, so people on Earth could watch the astronauts lift off from the Moon.',
     photo: 'assets/photos/apollo-15-lrv.jpg', photoCaption: 'James Irwin with the lunar module and the rover, 1971. Photo: NASA',
-    story: '', video: '',
+    story: '', video: 'videos/apollo-15-lrv.mp4',
     sources: [
       { label: 'NSSDCA: Apollo 15 Lunar Module / LRV', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C' },
       { label: 'NASA: Apollo 15', url: 'https://www.nasa.gov/mission/apollo-15/' },
