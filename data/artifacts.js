@@ -26,19 +26,19 @@ export const worlds = {
 // 'overview' | 'earth' | 'world:<moon|mars>' | 'artifact:<id>' | 'transit'.
 // Connective text is a factual draft. The team can rewrite it in their own voice.
 export const storyChapters = [
-  { shot: 'overview', kind: 'intro', title: 'Beyond the Void', text: 'Scroll to travel to the machines NASA left behind on the Moon and Mars.' },
-  { shot: 'earth', title: 'It started here', text: 'Since the 1960s, NASA has sent robots and astronauts across the solar system. When their missions ended, much of their hardware stayed behind.' },
-  { shot: 'world:moon', title: 'The Moon', text: 'About 384,000 km from Earth. Our first stop: three machines are waiting here.' },
+  { shot: 'overview', kind: 'intro', title: 'Beyond the Void', text: 'Use your scroll bar to see the machines that NASA left behind after their mission on the Moon and Mars.' },
+  { shot: 'earth', title: 'It All Began on Earth', text: 'Starting in the sixties, NASA sent machines and astronauts into our solar system. After completion of their tasks, many of these devices were just left there.' },
+  { shot: 'world:moon', title: 'The Moon', text: 'It is about 384,000 km from us. And our first destination is three machines left here.' },
   { shot: 'artifact:surveyor-3' },
   { shot: 'artifact:apollo-11-eagle' },
   { shot: 'artifact:apollo-15-lrv' },
-  { shot: 'transit', title: 'Next stop: Mars', text: 'On average, Mars is about 225 million km from Earth, almost 600 times farther than the Moon.' },
-  { shot: 'world:mars', title: 'Mars', text: 'Four machines, from 1976 to 2024. Each one taught us something new about the Red Planet.' },
+  { shot: 'transit', title: 'Next Destination: Mars', text: 'Mars is on average about 225 million km away from Earth, so it is about 600 times farther than the Moon.' },
+  { shot: 'world:mars', title: 'Mars', text: 'Four machines between years of 1976 and 2021. Machines that made new information available.' },
   { shot: 'artifact:viking-1' },
   { shot: 'artifact:sojourner' },
   { shot: 'artifact:opportunity' },
   { shot: 'artifact:ingenuity' },
-  { shot: 'overview', kind: 'outro', title: 'Silent, but not forgotten', text: 'These machines have gone quiet, but what they discovered still guides how we explore today.' },
+  { shot: 'overview', kind: 'outro', title: 'Silent But Not Forgotten', text: 'Although these machines do not work anymore, their discoveries are guiding our exploration nowadays.' },
 ];
 
 export const credits = [
@@ -63,7 +63,7 @@ export const artifacts = [
     didYouKnow: 'In November 1969 the Apollo 12 crew landed close by, walked over to Surveyor 3, and cut off its camera and other parts to bring back to Earth. It is the only time humans have visited a robot on another world.',
     size: { h: 3, w: 4.3, label: 'about 3 m tall; its three legs span 4.3 m' },
     photo: 'assets/photos/surveyor-3.jpg', photoCaption: "Apollo 12's Pete Conrad visits Surveyor 3, November 1969. Photo: NASA",
-    story: "Surveyor 3 acted as a scout. Its purpose was to find out if the planet’s surface could accommodate human presence. Two and a half years later, it met up with its first humans—those from Apollo 12’s mission, the only time when robots had guests from Earth on their territory.", video: 'videos/surveyor-3.mp4',
+    story: "Surveyor 3 acted as a scout. Its purpose was to find out if the Moon’s surface could accommodate human presence. Two and a half years later, it met up with its first humans—those from Apollo 12’s mission, the only time when robots had guests from Earth on their territory.", video: 'videos/surveyor-3.mp4',
     sources: [
       { label: 'NSSDCA: Surveyor 3', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-035A' },
       { label: 'NASA Science: Surveyor 3', url: 'https://science.nasa.gov/mission/surveyor-3/' },
@@ -79,7 +79,7 @@ export const artifacts = [
     didYouKnow: 'A metal plaque on one of Eagle\'s legs is still there. It says the explorers "came in peace for all mankind."',
     size: { h: 3.2, w: 9.4, label: 'descent stage about 3.2 m tall; 9.4 m from footpad to footpad' },
     photo: 'assets/photos/apollo-11-eagle.jpg', photoCaption: 'Eagle on the Moon while Buzz Aldrin unpacks experiments, July 1969. Photo: NASA',
-    story: "While the upper part of Eagle brought its passengers back safely, the lower part executed its final mission—becoming a launchpad for the capsule that stayed right where it landed; and next to it, the laser reflector left by astronauts keeps reflecting lasers fired from Earth, providing scientific data.", video: 'videos/apollo-11-eagle.mp4',
+    story: "While the upper part of Eagle brought its passengers back safely, the lower part executed its final mission—becoming a launchpad for the upper part—and stayed right where it landed; next to it, the laser reflector left by astronauts keeps reflecting lasers fired from Earth, providing scientific data.", video: 'videos/apollo-11-eagle.mp4',
     sources: [
       { label: 'NSSDCA: Apollo 11 Lunar Module', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C' },
       { label: 'NASA: Apollo 11', url: 'https://www.nasa.gov/mission/apollo-11/' },
@@ -111,7 +111,7 @@ export const artifacts = [
     didYouKnow: 'Viking 1 kept working for over six years, far beyond its planned 90 days.',
     size: { h: 2, w: 3, label: 'about 2 m tall and 3 m across' },
     photo: 'assets/photos/viking-1.jpg', photoCaption: 'A Viking lander test model on Earth. Photo: NASA',
-    story: "Viking 1 was expected to work for 90 days but managed to be in operation for six and a half years sending the first ever color pictures of the Martian landscape. This mission was to find evidence of life, but, rather, raised a mystery. The research started by Viking 1 is ongoing until now.", video: 'videos/viking-1.mp4',
+    story: "Viking 1 was expected to work for 90 days but managed to be in operation for more than six years sending the first ever color pictures of the Martian landscape. This mission was to find evidence of life, but, rather, raised a mystery. The research started by Viking 1 is ongoing until now.", video: 'videos/viking-1.mp4',
     sources: [
       { label: 'NSSDCA: Viking 1 Lander', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C' },
       { label: 'NASA Science: Viking 1', url: 'https://science.nasa.gov/mission/viking-1/' },
@@ -143,7 +143,7 @@ export const artifacts = [
     didYouKnow: 'Opportunity was planned to work for 90 Martian days. It lasted almost 15 years.',
     size: { h: 1.5, w: 2.3, label: 'about 1.5 m tall, 2.3 m wide and 1.6 m long, like a golf cart' },
     photo: 'assets/photos/opportunity.jpg', photoCaption: "Artist's illustration of a Mars Exploration Rover like Opportunity. Image: NASA/JPL",
-    story: "Opportunity rover was supposed to run during 90 sols (Martian days), but managed to live for 15 years. Its major discoveries included tiny spheroid formations called “blueberries” and rocks which could have been created in liquid medium. In 2018 the planet got wrapped into a planet-wide dust storm, which led to the death of the rover.", video: 'videos/opportunity.mp4',
+    story: "Opportunity rover was supposed to run during 90 sols (Martian days), but managed to live for almost 15 years. Its major discoveries included tiny spheroid formations called “blueberries” and rocks which could have been created in liquid medium. In 2018 the planet got wrapped into a planet-wide dust storm, which led to the death of the rover.", video: 'videos/opportunity.mp4',
     sources: [
       { label: 'NASA Science: Spirit & Opportunity', url: 'https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/' },
       { label: 'NSSDCA: Opportunity', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-032A' },
