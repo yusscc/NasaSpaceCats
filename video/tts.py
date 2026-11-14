@@ -18,7 +18,8 @@ async def main():
     # group spoken words back into script lines; show the script's own spelling and punctuation
     out, i = [], 0
     for line in lines:
-        toks, need, ws = line.split(), len(line.split()), []
+        toks = [t for t in line.split() if any(c.isalnum() for c in t)]  # a lone '-' is not spoken, so it has no timing
+        need, ws = len(toks), []
         while need > 0:
             w = words[i]; n = len(w['w'].split()); i += 1
             ws.append({**w, 'w': ' '.join(toks[len(toks) - need:len(toks) - need + n])}); need -= n

@@ -63,7 +63,7 @@ export const artifacts = [
     didYouKnow: 'In November 1969 the Apollo 12 crew landed close by, walked over to Surveyor 3, and cut off its camera and other parts to bring back to Earth. It is the only time humans have visited a robot on another world.',
     size: { h: 3, w: 4.3, label: 'about 3 m tall; its three legs span 4.3 m' },
     photo: 'assets/photos/surveyor-3.jpg', photoCaption: "Apollo 12's Pete Conrad visits Surveyor 3, November 1969. Photo: NASA",
-    story: '', video: 'videos/surveyor-3.mp4',
+    story: "Surveyor 3 acted as a scout. Its purpose was to find out if the planet’s surface could accommodate human presence. Two and a half years later, it met up with its first humans—those from Apollo 12’s mission, the only time when robots had guests from Earth on their territory.", video: 'videos/surveyor-3.mp4',
     sources: [
       { label: 'NSSDCA: Surveyor 3', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1967-035A' },
       { label: 'NASA Science: Surveyor 3', url: 'https://science.nasa.gov/mission/surveyor-3/' },
@@ -79,7 +79,7 @@ export const artifacts = [
     didYouKnow: 'A metal plaque on one of Eagle\'s legs is still there. It says the explorers "came in peace for all mankind."',
     size: { h: 3.2, w: 9.4, label: 'descent stage about 3.2 m tall; 9.4 m from footpad to footpad' },
     photo: 'assets/photos/apollo-11-eagle.jpg', photoCaption: 'Eagle on the Moon while Buzz Aldrin unpacks experiments, July 1969. Photo: NASA',
-    story: '', video: 'videos/apollo-11-eagle.mp4',
+    story: "While the upper part of Eagle brought its passengers back safely, the lower part executed its final mission—becoming a launchpad for the capsule that stayed right where it landed; and next to it, the laser reflector left by astronauts keeps reflecting lasers fired from Earth, providing scientific data.", video: 'videos/apollo-11-eagle.mp4',
     sources: [
       { label: 'NSSDCA: Apollo 11 Lunar Module', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C' },
       { label: 'NASA: Apollo 11', url: 'https://www.nasa.gov/mission/apollo-11/' },
@@ -95,7 +95,7 @@ export const artifacts = [
     didYouKnow: 'The crew parked the rover with its TV camera pointing at the lander, so people on Earth could watch the astronauts lift off from the Moon.',
     size: { h: 1.1, w: 3.1, label: 'about 3.1 m long and 1.1 m tall, like a small car' },
     photo: 'assets/photos/apollo-15-lrv.jpg', photoCaption: 'James Irwin with the lunar module and the rover, 1971. Photo: NASA',
-    story: '', video: 'videos/apollo-15-lrv.mp4',
+    story: "During three days, the Moon got its very own automobile. Scott and Irwin travelled some 28 kilometers and found a piece of stone, called the Genesis Rock, estimated to be approximately 4 billion years old. Later on, they positioned the rover in front of their lander with its camera pointing at it; so the rover’s last mission became documenting their departure.", video: 'videos/apollo-15-lrv.mp4',
     sources: [
       { label: 'NSSDCA: Apollo 15 Lunar Module / LRV', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1971-063C' },
       { label: 'NASA: Apollo 15', url: 'https://www.nasa.gov/mission/apollo-15/' },
