@@ -74,7 +74,7 @@ export const artifacts = [
     learned: 'The crew brought back about 21.5 kg of Moon rock and soil. The laser retroreflector they set up lets observatories on Earth measure the distance to the Moon to within centimetres, which showed that the Moon is slowly drifting away from Earth (about 3.8 cm per year).',
     didYouKnow: 'A metal plaque on one of Eagle\'s legs is still there. It says the explorers "came in peace for all mankind."',
     photo: 'assets/photos/apollo-11-eagle.jpg', photoCaption: 'Eagle on the Moon while Buzz Aldrin unpacks experiments, July 1969. Photo: NASA',
-    story: '', video: '',
+    story: '', video: 'videos/apollo-11-eagle.mp4',
     sources: [
       { label: 'NSSDCA: Apollo 11 Lunar Module', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C' },
       { label: 'NASA: Apollo 11', url: 'https://www.nasa.gov/mission/apollo-11/' },

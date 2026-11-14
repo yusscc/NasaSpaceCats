@@ -227,7 +227,7 @@ function openPanel(a) {
   showPanel(`<div class="type">${worlds[a.world].name} · ${a.type}</div><h2>${a.name}</h2>`, `
     <span class="badge ${a.statusKind === 'active' ? 'active' : ''}">${a.status}</span>
     <figure class="photo"><img src="${a.photo}" alt="${a.photoCaption}"><figcaption>${a.photoCaption}</figcaption></figure>
-    <div class="video">${videoHtml(a.video)}</div>
+    <div class="video">${videoHtml(a.video)}</div>${a.video && !/youtu/.test(a.video) ? '<p class="si-note">Narration: AI text-to-speech voice · video assembled with SI-written code</p>' : ''}
     <h3>Story</h3>
     <p class="story ${a.story ? '' : 'empty'}">${a.story || 'Story and narration coming soon.'}</p>
     <dl class="facts">
