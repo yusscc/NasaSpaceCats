@@ -47,6 +47,7 @@ export const credits = [
   'Sun, planets, Saturn rings, star background: Solar System Scope (CC BY 4.0), via Wikimedia Commons',
   'Artifact photos: NASA / NASA-JPL (public domain), via Wikimedia Commons',
   'Button icons: NASA LRO Moon nearside and NASA Viking Mars mosaic (public domain), via Wikimedia Commons',
+  '3D models (Apollo Lunar Module, Viking Lander, Opportunity rover, Ingenuity helicopter): NASA 3D Resources (free to use), github.com/nasa/NASA-3D-Resources. Shown much larger than real scale.',
 ];
 
 export const artifacts = [
@@ -66,7 +67,7 @@ export const artifacts = [
     ],
   },
   {
-    id: 'apollo-11-eagle', world: 'moon', name: 'Apollo 11 – Eagle descent stage', type: 'Crewed lander + experiments',
+    id: 'apollo-11-eagle', model: 'assets/models/apollo-lm.glb', modelKeepBelow: 0.5, world: 'moon', name: 'Apollo 11 – Eagle descent stage', type: 'Crewed lander + experiments',
     lat: 0.6742, lon: 23.4731, place: 'Mare Tranquillitatis (Sea of Tranquility)',
     launched: '16 Jul 1969', landed: '20 Jul 1969', lastContact: 'Descent stage: none after liftoff. Laser mirror: still in use', mass: '≈ 2,000 kg descent stage (dry)',
     status: 'Descent stage silent. The laser mirror left beside it still works today.', statusKind: 'active',
@@ -74,7 +75,7 @@ export const artifacts = [
     learned: 'The crew brought back about 21.5 kg of Moon rock and soil. The laser retroreflector they set up lets observatories on Earth measure the distance to the Moon to within centimetres, which showed that the Moon is slowly drifting away from Earth (about 3.8 cm per year).',
     didYouKnow: 'A metal plaque on one of Eagle\'s legs is still there. It says the explorers "came in peace for all mankind."',
     photo: 'assets/photos/apollo-11-eagle.jpg', photoCaption: 'Eagle on the Moon while Buzz Aldrin unpacks experiments, July 1969. Photo: NASA',
-    story: '', video: '',
+    story: '', video: 'videos/apollo-11-eagle.mp4',
     sources: [
       { label: 'NSSDCA: Apollo 11 Lunar Module', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1969-059C' },
       { label: 'NASA: Apollo 11', url: 'https://www.nasa.gov/mission/apollo-11/' },
@@ -96,7 +97,7 @@ export const artifacts = [
     ],
   },
   {
-    id: 'viking-1', world: 'mars', name: 'Viking 1 Lander', type: 'Robotic lander',
+    id: 'viking-1', model: 'assets/models/viking.glb', world: 'mars', name: 'Viking 1 Lander', type: 'Robotic lander',
     lat: 22.27, lon: -47.95, place: 'Chryse Planitia',
     launched: '20 Aug 1975', landed: '20 Jul 1976', lastContact: 'Nov 1982', mass: '≈ 600 kg at landing',
     status: 'Silent since 1982.', statusKind: 'silent',
@@ -126,7 +127,7 @@ export const artifacts = [
     ],
   },
   {
-    id: 'opportunity', world: 'mars', name: 'Opportunity Rover', type: 'Robotic rover',
+    id: 'opportunity', model: 'assets/models/opportunity.glb', world: 'mars', name: 'Opportunity Rover', type: 'Robotic rover',
     lat: -1.9462, lon: -5.5266, place: 'Meridiani Planum (landing site; it drove ≈ 45 km from here)',
     launched: '7 Jul 2003', landed: '25 Jan 2004', lastContact: '10 Jun 2018', mass: '≈ 185 kg',
     status: 'Silent since a planet-wide dust storm in 2018.', statusKind: 'silent',
@@ -141,7 +142,7 @@ export const artifacts = [
     ],
   },
   {
-    id: 'ingenuity', world: 'mars', name: 'Ingenuity Helicopter', type: 'Robotic helicopter',
+    id: 'ingenuity', model: 'assets/models/ingenuity.glb', world: 'mars', name: 'Ingenuity Helicopter', type: 'Robotic helicopter',
     lat: 18.4447, lon: 77.4508, place: 'Jezero Crater (near the Perseverance landing site)',
     launched: '30 Jul 2020', landed: '18 Feb 2021', lastContact: 'Mission ended 25 Jan 2024', mass: '1.8 kg',
     status: 'Grounded after rotor damage on its 72nd flight.', statusKind: 'silent',

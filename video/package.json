@@ -1,0 +1,16 @@
+{
+  "name": "nasaspace-video",
+  "private": true,
+  "description": "Remotion project for the artifact videos. SI-generated code (Claude).",
+  "scripts": {
+    "studio": "remotion studio src/index.jsx",
+    "render": "remotion render src/index.jsx Apollo11 out/apollo-11-eagle.mp4 --codec=h264 --crf=28 --metadata=\"comment=SI disclosure: narration is AI text-to-speech (Microsoft Edge neural voice en-US-AriaNeural); video built with SI-written Remotion code (Claude). Photos: NASA, public domain.\" --metadata=\"title=Apollo 11 - Eagle\""
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.528",
+    "@remotion/google-fonts": "4.0.528",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.528"
+  }
+}

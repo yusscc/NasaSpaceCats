@@ -162,3 +162,4 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 @media (max-height: 720px) { .card .dyk { display: none; } }
 @media (prefers-reduced-motion: reduce) { .panel, .scroll-cue span::after, .chip.live::before { animation: none; } .card { transition: none; } }
+.si-note{margin:.4rem 0 0;font-size:.75rem;color:var(--muted)}
