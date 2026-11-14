@@ -269,10 +269,35 @@ function focusArtifact(a) {
 }
 
 // ---------- UI ----------
+// ---------- timeline scrubber: only machines that had landed by the chosen year ----------
+let untilYear = 2021;
+const yearOf = a => +a.landed.slice(-4);
+const shown = a => mode === 'story' || yearOf(a) <= untilYear; // the story always shows everything
+const landYears = [...new Set(artifacts.map(yearOf))].sort((a, b) => a - b);
+const yr = $('year');
+yr.min = landYears[0]; yr.max = landYears.at(-1);
+$('year-ticks').innerHTML = landYears.map(y =>
+  `<button tabindex="-1" data-y="${y}" title="${y}" style="left:${(y - yr.min) / (yr.max - yr.min) * 100}%">'${String(y).slice(2)}</button>`).join('');
+function setYear(y) {
+  untilYear = +y;
+  yr.value = untilYear;
+  $('year-out').value = untilYear;
+  const landed = artifacts.filter(shown).sort((a, b) => yearOf(a) - yearOf(b));
+  const last = landed.at(-1);
+  $('year-count').textContent = `${landed.length} of ${artifacts.length} machines` + (last ? ` · newest: ${last.name} (${yearOf(last)})` : '');
+  document.querySelectorAll('#year-ticks button').forEach(b => b.classList.toggle('on', +b.dataset.y <= untilYear));
+  if (selected && !shown(selected)) closePanel();
+  if (current) renderList();
+}
+yr.addEventListener('input', () => setYear(yr.value));
+$('year-ticks').onclick = e => { const b = e.target.closest('button'); if (b) setYear(b.dataset.y); };
+
 function renderList() {
   const ul = $('artifact-list');
   ul.innerHTML = '';
-  for (const a of artifacts.filter(x => x.world === current)) {
+  const here = artifacts.filter(x => x.world === current && shown(x));
+  if (!here.length) ul.innerHTML = `<li class="hint">Nothing had landed here by ${untilYear}.</li>`;
+  for (const a of here) {
     const btn = document.createElement('button');
     btn.dataset.id = a.id;
     btn.innerHTML = `${a.name}<small>${a.landed.slice(-4)} · ${a.type}</small>`;
@@ -433,7 +458,7 @@ const pick = e => {
   if (!current) return; // story chapters between worlds have nothing to click
   ndc.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
   ray.setFromCamera(ndc, camera);
-  return ray.intersectObjects(bodies[current].markers)[0]?.object.userData.artifact;
+  return ray.intersectObjects(bodies[current].markers).map(h => h.object.userData.artifact).find(shown);
 };
 let down = null;
 renderer.domElement.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; controls.autoRotate = false; });
@@ -471,8 +496,9 @@ renderer.setAnimationLoop(now => {
     for (const m of b.markers) {
       m.scale.setScalar(m.userData.base * (m.userData.artifact === selected ? 1.8 : 1 + 0.35 * Math.sin(t * 3)));
       // the glowing dot gives way to the 3D model when the camera is close
-      const mo = m.userData.artifact.modelObj;
-      m.visible = !(mo && camera.position.distanceTo(mo.getWorldPosition(tmpV)) < b.radius * 0.4);
+      const a = m.userData.artifact, mo = a.modelObj, on = shown(a);
+      if (mo) mo.visible = on;
+      m.visible = on && !(mo && camera.position.distanceTo(mo.getWorldPosition(tmpV)) < b.radius * 0.4);
     }
   }
   if (mode === 'story') updateStoryCamera();
@@ -519,7 +545,7 @@ function cardHtml(c, i) {
       <div class="dyk"><b>Did you know?</b>${a.didYouKnow}</div>
       <div class="actions"><button class="pill primary" data-open="${a.id}">Read the full file →</button></div>`;
   }
-  if (c.kind === 'intro') return `<div class="kicker">NASA Space Apps Challenge 2026</div><h2>${c.title}</h2><p class="lead">${c.text}</p>
+  if (c.kind === 'intro') return `<div class="kicker">NASA Space Apps 2026 · Abandoned but not Forgotten</div><h2>${c.title}</h2><p class="lead">${c.text}</p>
       <ul class="stats"><li><b>${artifacts.length}</b>machines</li><li><b>${Object.keys(worlds).length}</b>worlds</li><li><b>${Math.min(...years)}–${Math.max(...years)}</b>landings</li></ul>
       <div class="scroll-cue" aria-hidden="true"><span></span>Scroll to begin</div>`;
   if (c.kind === 'outro') return `<h2>${c.title}</h2><p class="lead">${c.text}</p>
@@ -615,4 +641,5 @@ function enterStory() {
 
 $('skip').onclick = enterExplore;
 $('back-to-story').onclick = enterStory;
+setYear(untilYear);
 enterStory();

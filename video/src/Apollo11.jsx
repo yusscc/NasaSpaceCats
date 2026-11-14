@@ -16,5 +16,5 @@ const shots = [
 export const Apollo11 = () => (
   <Story timings={timings} voice="voice.mp3" shots={shots}
     title={{ title: 'Apollo 11 · Eagle', sub: 'Sea of Tranquility · 20 July 1969' }}
-    end={{ title: 'Abandoned but not Forgotten', sub: 'Photos: NASA (public domain) · Voice: AI text-to-speech' }} />
+    end={{ title: 'Beyond the Void', sub: 'Photos: NASA (public domain) · Voice: AI text-to-speech' }} />
 );
