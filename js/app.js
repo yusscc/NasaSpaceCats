@@ -285,8 +285,58 @@ function videoHtml(src) {
 }
 
 let selected = null;
+// ---------- explorer progress, quiz and badge (kept in this browser only) ----------
+const N = artifacts.length;
+let prog = { seen: [], quiz: [], awarded: false };
+try { prog = { ...prog, ...JSON.parse(localStorage.getItem('abf-progress')) }; } catch {}
+const saveProg = () => { try { localStorage.setItem('abf-progress', JSON.stringify(prog)); } catch {} };
+const year = a => +a.landed.slice(-4);
+
+function updateScore() {
+  $('score').textContent = `🏅 Found ${prog.seen.length}/${N} · Quiz ${prog.quiz.length}/${N}`;
+  if (!prog.awarded && prog.seen.length === N && prog.quiz.length === N) { prog.awarded = true; saveProg(); showAward(); }
+}
+function markSeen(a) {
+  if (!a || prog.seen.includes(a.id)) return;
+  prog.seen.push(a.id); saveProg(); updateScore();
+}
+
+// one question per machine, built from the data so the answer is always right
+function quizHtml(a) {
+  if (prog.quiz.includes(a.id)) return `<p class="quiz-done">✓ You know it: ${a.name} landed in ${year(a)}.</p>`;
+  const others = [...new Set(artifacts.map(year))].filter(y => y !== year(a)).sort((x, y) => Math.abs(x - year(a)) - Math.abs(y - year(a)));
+  const options = [year(a), ...others.slice(0, 2)].sort((x, y) => x - y);
+  return `<div class="quiz" data-id="${a.id}"><p>In which year did <b>${a.name}</b> land on ${worlds[a.world].name === 'Mars' ? 'Mars' : 'the Moon'}?</p>
+    <div class="quiz-options">${options.map(y => `<button class="pill" data-year="${y}">${y}</button>`).join('')}</div>
+    <p class="quiz-feedback" aria-live="polite"></p></div>`;
+}
+$('panel-body').addEventListener('click', e => {
+  const b = e.target.closest('.quiz button');
+  if (!b) return;
+  const quiz = b.closest('.quiz'), a = artifacts.find(x => x.id === quiz.dataset.id), right = +b.dataset.year === year(a);
+  b.classList.add(right ? 'right' : 'wrong');
+  quiz.querySelector('.quiz-feedback').textContent = right ? `Correct! ${a.landed}.` : 'Not quite. Try again!';
+  if (right) {
+    quiz.querySelectorAll('button').forEach(x => (x.disabled = true));
+    if (!prog.quiz.includes(a.id)) { prog.quiz.push(a.id); saveProg(); updateScore(); }
+  }
+});
+
+function showAward() {
+  const done = prog.seen.length === N && prog.quiz.length === N;
+  $('award-body').innerHTML = `<div class="award-icon" aria-hidden="true">${done ? '🏅' : '🛰️'}</div>
+    <h2 id="award-title">${done ? 'Mission Archivist!' : 'Your mission log'}</h2>
+    <p>${done ? `You found all ${N} machines and answered every quiz. They are abandoned, but thanks to you, not forgotten.` : `Find all ${N} machines and answer each quiz to earn the Mission Archivist badge.`}</p>
+    <ul class="log">${artifacts.map(a => `<li><span>${a.name}</span><span>${prog.seen.includes(a.id) ? '✓ found' : '— not yet'}${prog.quiz.includes(a.id) ? ' · ✓ quiz' : ''}</span></li>`).join('')}</ul>`;
+  $('award').showModal();
+}
+$('score').onclick = showAward;
+$('award-close').onclick = () => $('award').close();
+updateScore();
+
 function openPanel(a) {
   selected = a;
+  markSeen(a);
   document.querySelectorAll('#artifact-list button').forEach(b => b.setAttribute('aria-current', b.dataset.id === a.id));
   const lat = `${Math.abs(a.lat).toFixed(2)}°${a.lat >= 0 ? 'N' : 'S'}`, lon = `${Math.abs(a.lon).toFixed(2)}°${a.lon >= 0 ? 'E' : 'W'}`;
   showPanel(`<div class="type">${worlds[a.world].name} · ${a.type}</div><h2>${a.name}</h2>`, `
@@ -317,6 +367,8 @@ function openPanel(a) {
     </div>
     <h3>Did you know?</h3>
     <p class="dyk">${a.didYouKnow}</p>
+    <h3>Quick quiz</h3>
+    ${quizHtml(a)}
     <h3>Sources</h3>
     <ul class="sources">${a.sources.map(s => `<li><a href="${s.url}" target="_blank" rel="noopener">${s.label}</a></li>`).join('')}</ul>`);
 }
@@ -524,6 +576,7 @@ function updateStoryCamera() {
     const c = shots[n];
     setWorld(c.world || null);
     selected = c.artifact || null;
+    markSeen(c.artifact);
   }
   $('progress-bar').style.width = `${(p / (shots.length - 1)) * 100}%`;
 }
