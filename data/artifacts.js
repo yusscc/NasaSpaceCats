@@ -26,19 +26,19 @@ export const worlds = {
 // 'overview' | 'earth' | 'world:<moon|mars>' | 'artifact:<id>' | 'transit'.
 // Connective text is a factual draft. The team can rewrite it in their own voice.
 export const storyChapters = [
-  { shot: 'overview', kind: 'intro', title: 'Beyond the Void', text: 'Scroll to travel to the machines NASA left behind on the Moon and Mars.' },
-  { shot: 'earth', title: 'It started here', text: 'Since the 1960s, NASA has sent robots and astronauts across the solar system. When their missions ended, much of their hardware stayed behind.' },
-  { shot: 'world:moon', title: 'The Moon', text: 'About 384,000 km from Earth. Our first stop: three machines are waiting here.' },
+  { shot: 'overview', kind: 'intro', title: 'Beyond the Void', text: 'Use your scroll bar to see the machines that NASA left behind after their mission on the Moon and Mars.' },
+  { shot: 'earth', title: 'It All Began on Earth', text: 'Starting in the sixties, NASA sent machines and astronauts into our solar system. After completion of their tasks, many of these devices were just left there.' },
+  { shot: 'world:moon', title: 'The Moon', text: 'It is about 384,000 km from us. And our first destination is three machines left here.' },
   { shot: 'artifact:surveyor-3' },
   { shot: 'artifact:apollo-11-eagle' },
   { shot: 'artifact:apollo-15-lrv' },
-  { shot: 'transit', title: 'Next stop: Mars', text: 'On average, Mars is about 225 million km from Earth, almost 600 times farther than the Moon.' },
-  { shot: 'world:mars', title: 'Mars', text: 'Four machines, from 1976 to 2024. Each one taught us something new about the Red Planet.' },
+  { shot: 'transit', title: 'Next Destination: Mars', text: 'Mars is on average about 225 million km away from Earth, so it is about 600 times farther than the Moon.' },
+  { shot: 'world:mars', title: 'Mars', text: 'Four machines between years of 1976 and 2021. Machines that made new information available.' },
   { shot: 'artifact:viking-1' },
   { shot: 'artifact:sojourner' },
   { shot: 'artifact:opportunity' },
   { shot: 'artifact:ingenuity' },
-  { shot: 'overview', kind: 'outro', title: 'Silent, but not forgotten', text: 'These machines have gone quiet, but what they discovered still guides how we explore today.' },
+  { shot: 'overview', kind: 'outro', title: 'Silent But Not Forgotten', text: 'Although these machines do not work anymore, their discoveries are guiding our exploration nowadays.' },
 ];
 
 export const credits = [
