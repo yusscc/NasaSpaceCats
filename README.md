@@ -5,6 +5,8 @@ NASA Space Apps Challenge 2026: [Abandoned but not Forgotten: Storytelling about
 An interactive 3D storytelling website for school-age space fans (ages 8–18). Fly through the solar system to the Moon and Mars, click the machines NASA left behind, and learn what each was built to do and what we discovered because of it.
 
 ## Features
+- **Cinematic scroll story:** scrolling moves the camera like a film, from the solar system to Earth, then the Moon's three landing sites, the flight to Mars, and Mars' four machines. Each chapter card links to the full file.
+- **Explore freely mode** at the end (or via the top-right button): drag, zoom and click your own way through.
 - 3D solar system (Sun, 8 planets, the Moon). The Sun is the light source, so every world has a real day and night side.
 - Animated camera flight between the Moon and Mars.
 - 7 artifacts placed at their real landing coordinates:
@@ -35,7 +37,7 @@ SI_LOG.md           record of Super Intelligence (AI) use
 ```
 
 ### Adding a story or video
-In `data/artifacts.js`, fill in the artifact's `story` text, and set `video` to a YouTube link or a file path such as `videos/opportunity.mp4`.
+Story chapter texts (intro, Earth, Moon, Mars, ending) are in `storyChapters` in `data/artifacts.js`. Rewrite them in your own voice. An artifact's `story` text replaces its default chapter text when filled in. For artifacts, fill in the `story` text, and set `video` to a YouTube link or a file path such as `videos/opportunity.mp4`.
 
 ## NASA data & resources
 - [NASA Space Science Data Coordinated Archive (NSSDCA)](https://nssdc.gsfc.nasa.gov/): mission parameters and status

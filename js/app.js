@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
-import { planets, worlds, artifacts, credits } from '../data/artifacts.js';
+import { planets, worlds, artifacts, credits, storyChapters } from '../data/artifacts.js';
 
 const $ = id => document.getElementById(id);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -167,19 +167,22 @@ function setLimits(key) {
   controls.maxDistance = 450; // scroll out to see the whole solar system
 }
 
+function setWorld(key) {
+  if (current) labelOf[current].visible = true;
+  current = key;
+  if (key) labelOf[key].visible = false;
+}
+
 function goToWorld(key, instant = false) {
   if (key === current || flight) return;
   closePanel();
-  const first = current === null;
-  if (current) labelOf[current].visible = true;
-  current = key;
-  labelOf[key].visible = false;
-  document.querySelectorAll('.worlds button').forEach(btn => btn.setAttribute('aria-pressed', btn.dataset.world === key));
+  setWorld(key);
+  document.querySelectorAll('.worlds button[data-world]').forEach(btn => btn.setAttribute('aria-pressed', btn.dataset.world === key));
   $('list-title').textContent = worlds[key].name;
   renderList();
   const { target, pos } = homeView(key);
   controls.minDistance = 0;
-  if (instant || first) { camera.position.copy(pos); controls.target.copy(target); setLimits(key); return; }
+  if (instant) { camera.position.copy(pos); controls.target.copy(target); setLimits(key); return; }
   $('flying').hidden = false;
   fly({ toPos: pos, toTarget: target, lift: 30, duration: 3200 }, () => { $('flying').hidden = true; setLimits(key); });
 }
@@ -277,7 +280,7 @@ setFolded(matchMedia('(max-width: 760px)').matches);
 
 $('close').onclick = closePanel;
 addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
-document.querySelectorAll('.worlds button').forEach(btn => {
+document.querySelectorAll('.worlds button[data-world]').forEach(btn => {
   btn.querySelector('img').src = worlds[btn.dataset.world].icon;
   btn.onclick = () => goToWorld(btn.dataset.world);
 });
@@ -299,13 +302,20 @@ renderer.domElement.addEventListener('pointerdown', e => { down = [e.clientX, e.
 renderer.domElement.addEventListener('pointerup', e => {
   if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 5) return;
   const a = pick(e);
+  if (mode === 'story') { if (a) openPanel(a); return; } // in the story the scroll drives the camera
   a ? focusArtifact(a) : closePanel();
 });
 renderer.domElement.addEventListener('pointermove', e => { renderer.domElement.style.cursor = pick(e) ? 'pointer' : ''; });
 
-addEventListener('resize', () => {
+// portrait phones get a wider lens so globes aren't cropped at the sides
+const fitLens = () => {
   camera.aspect = innerWidth / innerHeight;
+  camera.fov = camera.aspect < 1 ? Math.min(75, 45 / camera.aspect * 0.75) : 45;
   camera.updateProjectionMatrix();
+};
+fitLens();
+addEventListener('resize', () => {
+  fitLens();
   renderer.setSize(innerWidth, innerHeight);
   labels.setSize(innerWidth, innerHeight);
 });
@@ -321,9 +331,126 @@ renderer.setAnimationLoop(now => {
   for (const b of Object.values(bodies)) {
     for (const m of b.markers) m.scale.setScalar(m.userData.base * (m.userData.artifact === selected ? 1.8 : 1 + 0.35 * Math.sin(t * 3)));
   }
-  if (flight) stepFlight(now); else controls.update();
+  if (mode === 'story') updateStoryCamera();
+  else if (flight) stepFlight(now);
+  else controls.update();
   renderer.render(scene, camera);
   labels.render(scene, camera);
 });
 
-goToWorld('moon', true);
+// ---------- scroll story ----------
+let mode = 'story';
+const byId = Object.fromEntries(artifacts.map(a => [a.id, a]));
+
+function shotFor(spec) {
+  const [kind, arg] = spec.split(':');
+  if (kind === 'overview') return { pos: new THREE.Vector3(150, 150, 210), target: new THREE.Vector3(85, 0, 20) }; // Sun off to the side, behind the title
+  if (kind === 'earth') {
+    const e = planetMeshes.earth.position, dir = e.clone().negate().normalize().applyAxisAngle(UP, 0.7);
+    return { pos: e.clone().addScaledVector(dir, 16).addScaledVector(UP, 5), target: e.clone() };
+  }
+  if (kind === 'world') { const v = homeView(arg); return { ...v, center: v.target, world: arg }; }
+  if (kind === 'transit') {
+    const m = bodies.moon.mesh.position, r = bodies.mars.mesh.position;
+    return { pos: m.clone().lerp(r, 0.4).addScaledVector(UP, 26), target: r.clone() };
+  }
+  const a = byId[arg], b = bodies[a.world], center = b.mesh.position.clone();
+  const dir = a.marker.getWorldPosition(new THREE.Vector3()).sub(center).normalize();
+  const dist = b.radius * 2.3;
+  return { pos: center.clone().addScaledVector(dir, dist), target: center, center, world: a.world, artifact: a };
+}
+
+const chapters = storyChapters.map(c => ({ ...c, a: c.shot.startsWith('artifact:') ? byId[c.shot.split(':')[1]] : null }));
+function cardHtml(c) {
+  if (c.a) {
+    const a = c.a;
+    return `<div class="type">${worlds[a.world].name} · ${a.landed.slice(-4)} · ${a.type}</div>
+      <h2>${a.name}</h2><p>${a.story || a.learned}</p><p class="dyk">${a.didYouKnow}</p>
+      <div class="actions"><button class="pill" data-open="${a.id}">Read the full file →</button></div>`;
+  }
+  const tag = c.kind ? '' : `<div class="type">Chapter</div>`;
+  const extra = c.kind === 'intro' ? '<div class="scroll-cue" aria-hidden="true">↓ Scroll</div>'
+    : c.kind === 'outro' ? '<div class="actions"><button class="pill primary" data-explore>Explore freely</button><button class="pill" data-top>Back to the start</button></div>' : '';
+  return `${tag}<h2>${c.title}</h2><p>${c.text}</p>${extra}`;
+}
+$('story').innerHTML = chapters.map(c => `<section class="chapter ${c.kind || ''}"><div class="card">${cardHtml(c)}</div></section>`).join('');
+$('story').addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  if (b.dataset.open) openPanel(byId[b.dataset.open]);
+  if ('explore' in b.dataset) enterExplore();
+  if ('top' in b.dataset) scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+});
+
+let shots = [];
+const camGoal = new THREE.Vector3(), targetGoal = new THREE.Vector3();
+let activeChapter = -1;
+const viewOff = { x: 0, y: 0 };
+const sections = () => document.querySelectorAll('.chapter');
+
+function updateStoryCamera() {
+  if (!shots.length) shots = chapters.map(c => shotFor(c.shot)); // after markers have world positions
+  const p = THREE.MathUtils.clamp(scrollY / innerHeight, 0, shots.length - 1);
+  const i = Math.min(Math.floor(p), shots.length - 2);
+  const t = ease(THREE.MathUtils.smoothstep(p - i, 0.25, 0.85)); // hold each shot while its card is on screen
+  const a = shots[i], b = shots[i + 1];
+  targetGoal.lerpVectors(a.target, b.target, t);
+  if (a.center && b.center && a.center.equals(b.center)) { // same world: swing around it, never through it
+    const va = a.pos.clone().sub(a.center), vb = b.pos.clone().sub(a.center);
+    const q = new THREE.Quaternion().setFromUnitVectors(va.clone().normalize(), vb.clone().normalize());
+    camGoal.copy(a.center).addScaledVector(va.normalize().applyQuaternion(new THREE.Quaternion().slerp(q, t)), THREE.MathUtils.lerp(a.pos.distanceTo(a.center), b.pos.distanceTo(a.center), t));
+  } else {
+    camGoal.lerpVectors(a.pos, b.pos, t).addScaledVector(UP, Math.sin(Math.PI * t) * a.pos.distanceTo(b.pos) * 0.25);
+  }
+  const k = reducedMotion ? 1 : 0.08; // smoothing gives the "film camera" feel
+  camera.position.lerp(camGoal, k);
+  controls.target.lerp(targetGoal, k);
+  camera.lookAt(controls.target);
+
+  // slide the 3D picture away from the card: card on the left -> world shifts right (phones: cards at bottom -> world shifts up)
+  const n = Math.round(p), c = chapters[n], phone = innerWidth <= 760;
+  const gx = phone || c.kind ? 0 : (n % 2 === 0 ? -0.17 : 0.17) * innerWidth;
+  const gy = phone && !c.kind ? 0.18 * innerHeight : 0;
+  viewOff.x += (gx - viewOff.x) * k;
+  viewOff.y += (gy - viewOff.y) * k;
+  camera.setViewOffset(innerWidth, innerHeight, viewOff.x, viewOff.y, innerWidth, innerHeight);
+
+  if (n !== activeChapter) {
+    activeChapter = n;
+    sections().forEach((s, j) => s.classList.toggle('in', j === n));
+    const c = shots[n];
+    setWorld(c.world || null);
+    selected = c.artifact || null;
+  }
+  $('progress-bar').style.width = `${(p / (shots.length - 1)) * 100}%`;
+}
+
+function enterExplore() {
+  mode = 'explore';
+  camera.clearViewOffset();
+  document.body.classList.replace('story-mode', 'explore-mode');
+  renderer.domElement.style.touchAction = 'none';
+  controls.enabled = true;
+  selected = null;
+  closePanel();
+  const from = current || 'moon';
+  setWorld(null);
+  goToWorld(from);
+}
+
+function enterStory() {
+  mode = 'story';
+  flight = null;
+  $('flying').hidden = true;
+  closePanel();
+  document.body.classList.replace('explore-mode', 'story-mode');
+  renderer.domElement.style.touchAction = 'pan-y'; // let phones scroll the page over the canvas
+  controls.enabled = false;
+  controls.autoRotate = false;
+  activeChapter = -1;
+  scrollTo({ top: 0 });
+}
+
+$('skip').onclick = enterExplore;
+$('back-to-story').onclick = enterStory;
+enterStory();

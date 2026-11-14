@@ -7,6 +7,7 @@ Required by NASA Space Apps 2026: every project must describe how SI tools were 
 | 2026-11-14 | Claude (Anthropic) | Analysed the challenge statement, rules and judging criteria; drafted the build plan | `docs/PLAN.md` | Team chose the idea, audience and scope |
 | 2026-11-14 | Claude (Anthropic) | Wrote the website code (3D scene, flights, UI) | `index.html`, `css/`, `js/` (header comment in each file, `generator` meta tag) | Team reviewed in browser |
 | 2026-11-14 | Claude (Anthropic) | Compiled artifact facts from NASA/NSSDCA pages, with a source link per artifact | `data/artifacts.js` | **TODO: team fact-checks every entry** |
+| 2026-11-14 | Claude (Anthropic) | Built the cinematic scroll-story mode (team chose this style from 4 examples) and drafted factual connective chapter text | `js/app.js`, `data/artifacts.js` (`storyChapters`) | **TODO: team rewrites chapter text in own voice** |
 | 2026-11-14 | Claude (Anthropic) | Searched for and selected public-domain / CC BY textures and icons | `assets/` (credits in README and the site's "Image credits") | Team approved |
 
 ## Not SI-generated

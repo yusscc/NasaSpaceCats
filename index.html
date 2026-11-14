@@ -14,16 +14,21 @@
 } }
 </script>
 </head>
-<body>
+<body class="story-mode">
+  <div class="progress" aria-hidden="true"><div id="progress-bar"></div></div>
   <header class="topbar">
     <h1>Abandoned <span>but not</span> Forgotten</h1>
-    <nav class="worlds" aria-label="Choose a world">
+    <button id="skip" class="pill story-only">Explore freely →</button>
+    <nav class="worlds explore-only" aria-label="Choose a world">
+      <button id="back-to-story" class="pill">↑ Story</button>
       <button data-world="moon" aria-pressed="true"><img alt="" width="28" height="28"> Moon</button>
       <button data-world="mars" aria-pressed="false"><img alt="" width="28" height="28"> Mars</button>
     </nav>
   </header>
 
-  <aside class="list" id="list" aria-label="Artifacts on this world">
+  <main id="story" class="story-only" aria-label="Story"></main>
+
+  <aside class="list explore-only" id="list" aria-label="Artifacts on this world">
     <button class="list-head" id="list-toggle" aria-expanded="true" aria-controls="list-content">
       <h2 id="list-title">The Moon</h2><span class="chev" aria-hidden="true">▾</span>
     </button>
