@@ -46,6 +46,7 @@ export const credits = [
   'Moon map: NASA imagery via three.js examples',
   'Sun, planets, Saturn rings, star background: Solar System Scope (CC BY 4.0), via Wikimedia Commons',
   'Artifact photos: NASA / NASA-JPL (public domain), via Wikimedia Commons',
+  'Video photos: NASA, NASA/JPL(-Caltech), Cornell, ASU and University of Arizona (public domain), via Wikimedia Commons; Viking 1 colour trench image reprocessed by Roel van der Hoorn',
   'Button icons: NASA LRO Moon nearside and NASA Viking Mars mosaic (public domain), via Wikimedia Commons',
   'Orbit photos: NASA Lunar Reconnaissance Orbiter (NASA/GSFC/Arizona State University) and Mars Reconnaissance Orbiter HiRISE (NASA/JPL/University of Arizona), public domain, via Wikimedia Commons',
   '3D models (Apollo Lunar Module, Viking Lander, Opportunity rover, Ingenuity helicopter): NASA 3D Resources (free to use), github.com/nasa/NASA-3D-Resources. Shown much larger than real scale.',
@@ -106,7 +107,7 @@ export const artifacts = [
     learned: 'Viking 1 sent back the first colour pictures from the surface of Mars and recorded Martian weather for more than six years. Its life experiments gave puzzling results. Most scientists concluded the soil chemistry, not life, explained them.',
     didYouKnow: 'Viking 1 kept working for over six years, far beyond its planned 90 days.',
     photo: 'assets/photos/viking-1.jpg', photoCaption: 'A Viking lander test model on Earth. Photo: NASA',
-    story: '', video: '',
+    story: '', video: 'videos/viking-1.mp4',
     sources: [
       { label: 'NSSDCA: Viking 1 Lander', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C' },
       { label: 'NASA Science: Viking 1', url: 'https://science.nasa.gov/mission/viking-1/' },
@@ -121,7 +122,7 @@ export const artifacts = [
     learned: 'Sojourner studied the chemistry of Martian rocks and helped show that this area had been shaped by ancient floods. It proved rovers could work on Mars, paving the way for every rover since.',
     didYouKnow: 'Sojourner is about the size of a microwave oven. It was planned to work for 7 days and kept going for about 12 weeks.',
     photo: 'assets/photos/sojourner.jpg', photoCaption: 'Sojourner next to a rock, seen from the Pathfinder lander, 1997. Photo: NASA/JPL',
-    story: '', video: '',
+    story: '', video: 'videos/sojourner.mp4',
     sources: [
       { label: 'NASA Science: Mars Pathfinder', url: 'https://science.nasa.gov/mission/mars-pathfinder/' },
       { label: 'NSSDCA: Mars Pathfinder', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A' },
@@ -136,7 +137,7 @@ export const artifacts = [
     learned: 'Opportunity found tiny round minerals nicknamed "blueberries" and rocks that could only have formed in water. That was strong evidence Meridiani Planum was once wet. It drove about 45 km, a record for a vehicle on another world at the time.',
     didYouKnow: 'Opportunity was planned to work for 90 Martian days. It lasted almost 15 years.',
     photo: 'assets/photos/opportunity.jpg', photoCaption: "Artist's illustration of a Mars Exploration Rover like Opportunity. Image: NASA/JPL",
-    story: '', video: '',
+    story: '', video: 'videos/opportunity.mp4',
     sources: [
       { label: 'NASA Science: Spirit & Opportunity', url: 'https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/' },
       { label: 'NSSDCA: Opportunity', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-032A' },
@@ -151,7 +152,7 @@ export const artifacts = [
     learned: 'Ingenuity made the first powered flight on another planet on 19 April 2021. It went on to fly 72 times and scout routes for the Perseverance rover, showing that future missions can use aircraft to explore Mars.',
     didYouKnow: 'Ingenuity was planned for just 5 test flights. It flew 72.',
     photo: 'assets/photos/ingenuity.jpg', photoCaption: 'Ingenuity on Mars, photographed by Perseverance, April 2021. Photo: NASA/JPL-Caltech',
-    story: '', video: '',
+    story: '', video: 'videos/ingenuity.mp4',
     sources: [
       { label: 'NASA Science: Ingenuity Mars Helicopter', url: 'https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/' },
       { label: 'NSSDCA: Mars 2020', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2020-052A' },

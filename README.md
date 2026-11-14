@@ -52,6 +52,7 @@ npm run studio    # preview and edit
 npm run render             # writes out/apollo-11-eagle.mp4; copy it to ../videos/
 npm run render:surveyor    # out/surveyor-3.mp4  (narration: ../videos/surveyor-3.txt)
 npm run render:apollo15    # out/apollo-15-lrv.mp4 (narration: ../videos/apollo-15-lrv.txt)
+npm run render:viking-1    # also render:sojourner, render:opportunity, render:ingenuity (Mars, in src/Mars.jsx)
 python tts.py ../videos/surveyor-3.txt public/surveyor-3      # redo a voice after editing its narration
 python tts.py ../videos/apollo-15-lrv.txt public/apollo-15
 ```
