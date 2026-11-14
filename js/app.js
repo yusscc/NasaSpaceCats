@@ -2,6 +2,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { planets, worlds, artifacts, credits, storyChapters } from '../data/artifacts.js';
 
 const $ = id => document.getElementById(id);
@@ -20,11 +22,19 @@ labels.domElement.className = 'labels';
 document.body.prepend(labels.domElement);
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.05, 5000);
-const controls = new OrbitControls(camera, renderer.domElement);
+const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.001, 5000);
+let controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.enablePan = false;
 controls.autoRotate = !reducedMotion;
+// OrbitControls reads camera.up only when created, so rebuild it after "up" changes (close-ups stand on a tilted surface)
+function rebuildControls() {
+  const old = controls;
+  controls = new OrbitControls(camera, renderer.domElement);
+  for (const k of ['enableDamping', 'enablePan', 'enabled', 'minDistance', 'maxDistance']) controls[k] = old[k];
+  controls.target.copy(old.target);
+  old.dispose();
+}
 controls.autoRotateSpeed = 0.4;
 
 const loader = new THREE.TextureLoader();
@@ -125,13 +135,59 @@ for (const a of artifacts) {
   a.marker = m;
 }
 
+// ---------- NASA 3D models, standing on the surface (much larger than real scale) ----------
+const MODEL_SIZE = 0.02; // model height as a fraction of the world radius
+const gltf = new GLTFLoader();
+// NASA's GLB files are Draco-compressed
+gltf.setDRACOLoader(new DRACOLoader().setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/gltf/'));
+for (const a of artifacts.filter(x => x.model)) {
+  gltf.load(a.model, ({ scene: obj }) => {
+    obj.updateMatrixWorld(true);
+    let box = new THREE.Box3().setFromObject(obj);
+    if (a.modelKeepBelow) { // e.g. Apollo LM: only the descent stage stayed on the Moon
+      const cutY = box.min.y + (box.max.y - box.min.y) * a.modelKeepBelow;
+      obj.traverse(o => { if (o.isMesh && new THREE.Box3().setFromObject(o).getCenter(new THREE.Vector3()).y > cutY) o.visible = false; });
+      box = new THREE.Box3();
+      obj.traverse(o => { if (o.isMesh && o.visible) box.expandByObject(o); });
+    }
+    const size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
+    const r = bodies[a.world].radius, k = (r * MODEL_SIZE) / Math.max(size.x, size.y, size.z);
+    obj.position.set(-c.x * k, -box.min.y * k, -c.z * k); // feet on the ground, centred
+    obj.scale.setScalar(k);
+    const holder = new THREE.Group();
+    holder.add(obj);
+    holder.position.copy(a.marker.position).setLength(r); // local to the world mesh
+    holder.quaternion.setFromUnitVectors(UP, a.marker.position.clone().normalize()); // stand up along the surface normal
+    bodies[a.world].mesh.add(holder);
+    a.modelObj = holder;
+  }, undefined, err => console.warn('model failed', a.model, err));
+}
+
+// close-up camera next to the artifact, on its sunlit side
+function closeShot(a) {
+  const b = bodies[a.world], h = b.radius * MODEL_SIZE;
+  const n = a.marker.getWorldPosition(new THREE.Vector3()).sub(b.mesh.position).normalize();
+  const ground = b.mesh.position.clone().addScaledVector(n, b.radius);
+  let side = ground.clone().negate().normalize(); // toward the Sun (at the origin)
+  side.addScaledVector(n, -side.dot(n));
+  if (side.lengthSq() < 1e-6) side = new THREE.Vector3(0, 1, 0).addScaledVector(n, -n.y);
+  side.normalize();
+  return { pos: ground.clone().addScaledVector(side, h * 3.2).addScaledVector(n, h * 1.6), target: ground.clone().addScaledVector(n, h * 0.45), h, up: n };
+}
+
+// soft fill light that travels with the camera; its short range only reaches nearby models
+const fill = new THREE.PointLight(0xffffff, 0.8, 0.4, 0);
+camera.add(fill);
+scene.add(camera);
+
 // ---------- camera flights ----------
 let flight = null;
 const ease = k => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
 
 // Around one body: slerp so we never pass through it. Between bodies: straight line rising above the solar system.
-function fly({ toPos, toTarget, center = null, lift = 0, duration = 1800 }, done) {
-  const f = { t0: performance.now(), duration: reducedMotion ? 1 : duration, fromPos: camera.position.clone(), toPos, fromTarget: controls.target.clone(), toTarget, lift, done };
+function fly({ toPos, toTarget, center = null, lift = 0, duration = 1800, up = UP }, done) {
+  const f = { t0: performance.now(), duration: reducedMotion ? 1 : duration, fromPos: camera.position.clone(), toPos, fromTarget: controls.target.clone(), toTarget, lift, done,
+    fromUp: camera.up.clone(), toUp: up.clone() };
   if (center) {
     f.center = center;
     f.a = f.fromPos.clone().sub(center);
@@ -152,7 +208,10 @@ function stepFlight(now) {
     camera.position.lerpVectors(f.fromPos, f.toPos, e);
     camera.position.y += Math.sin(Math.PI * e) * f.lift;
   }
-  if (k === 1) { flight = null; controls.enabled = true; f.done?.(); }
+  const u = f.fromUp.clone().lerp(f.toUp, e);
+  if (u.lengthSq() > 1e-6) camera.up.copy(u.normalize());
+  camera.lookAt(controls.target);
+  if (k === 1) { flight = null; camera.up.copy(f.toUp); rebuildControls(); controls.enabled = true; f.done?.(); }
 }
 
 // ---------- worlds ----------
@@ -193,7 +252,13 @@ function focusArtifact(a) {
   const b = bodies[a.world], center = b.mesh.position.clone();
   const dir = a.marker.getWorldPosition(new THREE.Vector3()).sub(center).normalize();
   controls.autoRotate = false;
-  fly({ toPos: center.clone().addScaledVector(dir, b.radius * 2.4), toTarget: center, center, duration: 1400 });
+  controls.minDistance = 0;
+  if (a.model) { // fly down to the 3D model and orbit around it
+    const s = closeShot(a);
+    fly({ toPos: s.pos, toTarget: s.target, center, duration: 2000, up: s.up }, () => { controls.minDistance = s.h * 1.2; });
+  } else {
+    fly({ toPos: center.clone().addScaledVector(dir, b.radius * 2.4), toTarget: center, center, duration: 1400 }, () => setLimits(a.world));
+  }
   openPanel(a);
 }
 
@@ -324,6 +389,7 @@ addEventListener('resize', () => {
 
 // ---------- loop ----------
 const clock = new THREE.Clock();
+const tmpV = new THREE.Vector3();
 renderer.setAnimationLoop(now => {
   const t = clock.getElapsedTime();
   if (!reducedMotion) {
@@ -331,7 +397,12 @@ renderer.setAnimationLoop(now => {
     for (const m of spinning) m.rotation.y += 0.002;
   }
   for (const b of Object.values(bodies)) {
-    for (const m of b.markers) m.scale.setScalar(m.userData.base * (m.userData.artifact === selected ? 1.8 : 1 + 0.35 * Math.sin(t * 3)));
+    for (const m of b.markers) {
+      m.scale.setScalar(m.userData.base * (m.userData.artifact === selected ? 1.8 : 1 + 0.35 * Math.sin(t * 3)));
+      // the glowing dot gives way to the 3D model when the camera is close
+      const mo = m.userData.artifact.modelObj;
+      m.visible = !(mo && camera.position.distanceTo(mo.getWorldPosition(tmpV)) < b.radius * 0.4);
+    }
   }
   if (mode === 'story') updateStoryCamera();
   else if (flight) stepFlight(now);
@@ -358,6 +429,7 @@ function shotFor(spec) {
   }
   const a = byId[arg], b = bodies[a.world], center = b.mesh.position.clone();
   const dir = a.marker.getWorldPosition(new THREE.Vector3()).sub(center).normalize();
+  if (a.model) return { ...closeShot(a), center, world: a.world, artifact: a };
   const dist = b.radius * 2.3;
   return { pos: center.clone().addScaledVector(dir, dist), target: center, center, world: a.world, artifact: a };
 }
@@ -412,13 +484,16 @@ function updateStoryCamera() {
   if (a.center && b.center && a.center.equals(b.center)) { // same world: swing around it, never through it
     const va = a.pos.clone().sub(a.center), vb = b.pos.clone().sub(a.center);
     const q = new THREE.Quaternion().setFromUnitVectors(va.clone().normalize(), vb.clone().normalize());
-    camGoal.copy(a.center).addScaledVector(va.normalize().applyQuaternion(new THREE.Quaternion().slerp(q, t)), THREE.MathUtils.lerp(a.pos.distanceTo(a.center), b.pos.distanceTo(a.center), t));
+    const hop = Math.sin(Math.PI * t) * va.angleTo(vb) * a.pos.distanceTo(a.center) * 0.8;
+    camGoal.copy(a.center).addScaledVector(va.normalize().applyQuaternion(new THREE.Quaternion().slerp(q, t)), THREE.MathUtils.lerp(a.pos.distanceTo(a.center), b.pos.distanceTo(a.center), t) + hop);
   } else {
     camGoal.lerpVectors(a.pos, b.pos, t).addScaledVector(UP, Math.sin(Math.PI * t) * a.pos.distanceTo(b.pos) * 0.25);
   }
   const k = reducedMotion ? 1 : 0.08; // smoothing gives the "film camera" feel
   camera.position.lerp(camGoal, k);
   controls.target.lerp(targetGoal, k);
+  const upGoal = (a.up || UP).clone().lerp(b.up || UP, t);
+  if (upGoal.lengthSq() > 1e-6) camera.up.lerp(upGoal.normalize(), k).normalize();
   camera.lookAt(controls.target);
 
   // slide the 3D picture away from the card: card on the left -> world shifts right (phones: cards at bottom -> world shifts up)
