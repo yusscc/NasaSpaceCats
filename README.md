@@ -33,6 +33,7 @@ data/artifacts.js   artifacts, planets, credits  ← edit content here
 assets/textures/    planet, Sun and star textures
 assets/icons/       Moon / Mars button icons
 assets/models/      NASA 3D models (GLB) shown in close-ups
+assets/orbit/       orbiter photos for the landing-vs-orbit slider
 videos/             artifact videos (+ narration scripts)
 video/              Remotion project that renders the videos
 docs/PLAN.md        challenge analysis, rules, plan
@@ -55,6 +56,7 @@ npm run render    # writes out/apollo-11-eagle.mp4; copy it to ../videos/
 - [NASA Space Science Data Coordinated Archive (NSSDCA)](https://nssdc.gsfc.nasa.gov/): mission parameters and status
 - NASA Science mission pages (linked per artifact in `data/artifacts.js`)
 - NASA Viking MDIM 2.1 colorized Mars mosaic (USGS, public domain)
+- Orbiter photos of each landing site: NASA Lunar Reconnaissance Orbiter (NASA/GSFC/Arizona State University) and Mars Reconnaissance Orbiter HiRISE (NASA/JPL/University of Arizona), public domain
 - [NASA 3D Resources](https://github.com/nasa/NASA-3D-Resources): Apollo Lunar Module, Viking Lander, Opportunity rover and Ingenuity helicopter models
 
 ## Credits
