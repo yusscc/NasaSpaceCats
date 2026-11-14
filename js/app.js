@@ -37,6 +37,11 @@ function rebuildControls() {
 }
 controls.autoRotateSpeed = 0.4;
 
+// loading screen follows the textures; 3D models use their own manager and arrive later
+THREE.DefaultLoadingManager.onProgress = (_, done, total) => { $('loading-bar').style.width = `${(done / total) * 100}%`; };
+const hideLoading = () => $('loading').classList.add('done');
+THREE.DefaultLoadingManager.onLoad = hideLoading;
+setTimeout(hideLoading, 15000); // never trap the visitor behind a stuck download
 const loader = new THREE.TextureLoader();
 const tex = url => { const t = loader.load(url); t.colorSpace = THREE.SRGBColorSpace; return t; };
 
@@ -137,9 +142,10 @@ for (const a of artifacts) {
 
 // ---------- NASA 3D models, standing on the surface (much larger than real scale) ----------
 const MODEL_SIZE = 0.02; // model height as a fraction of the world radius
-const gltf = new GLTFLoader();
+const modelManager = new THREE.LoadingManager();
+const gltf = new GLTFLoader(modelManager);
 // NASA's GLB files are Draco-compressed
-gltf.setDRACOLoader(new DRACOLoader().setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/gltf/'));
+gltf.setDRACOLoader(new DRACOLoader(modelManager).setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/gltf/'));
 for (const a of artifacts.filter(x => x.model)) {
   gltf.load(a.model, ({ scene: obj }) => {
     obj.updateMatrixWorld(true);

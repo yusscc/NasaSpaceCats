@@ -195,3 +195,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .log { list-style: none; margin: 0 0 18px; padding: 0; text-align: left; font-size: 13px; }
 .log li { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--line); }
 .log li span:last-child { color: var(--muted); white-space: nowrap; }
+
+/* loading screen */
+.loading { position: fixed; inset: 0; z-index: 20; display: grid; place-content: center; justify-items: center; gap: 14px; background: var(--bg); transition: opacity .6s, visibility .6s; }
+.loading.done { opacity: 0; visibility: hidden; }
+.loading p { margin: 0; font-family: var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.loading-track { width: min(260px, 70vw); height: 4px; border-radius: 4px; background: var(--line); overflow: hidden; }
+#loading-bar { width: 0; height: 100%; background: var(--accent); transition: width .3s; }
+@media (prefers-reduced-motion: reduce) { .loading, #loading-bar { transition: none; } }
+@media (max-width: 760px) { .score { bottom: 24px; } }
