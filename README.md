@@ -52,6 +52,15 @@ npm run studio    # preview and edit
 npm run render    # writes out/apollo-11-eagle.mp4; copy it to ../videos/
 ```
 
+### Submission demo video (≤ 30 s)
+`videos/demo.mp4` is the Space Apps demo. To rebuild it after the site changes (site served on http://localhost:5500):
+```
+cd video
+npm run capture                              # screenshots of the live site -> public/demo/
+python tts.py ../videos/demo.txt public/demo # AI voice + word timings from the script
+npm run render:demo                          # writes out/demo.mp4; copy it to ../videos/
+```
+
 ## NASA data & resources
 - [NASA Space Science Data Coordinated Archive (NSSDCA)](https://nssdc.gsfc.nasa.gov/): mission parameters and status
 - NASA Science mission pages (linked per artifact in `data/artifacts.js`)
