@@ -1,4 +1,4 @@
-# Abandoned but not Forgotten — Project Plan
+# Beyond the Void — Project Plan
 
 NASA Space Apps Challenge 2026 · Event: Nov 14–15, 2026
 **Hard deadline: Sunday Nov 15, 11:59 p.m. (your Local Event's time zone).** Click "Submit for Judging" before then.
@@ -88,7 +88,7 @@ The 2026 rules call AI "Super Intelligence (SI)", after a U.S. Executive Order. 
 | 8 | Pioneer 10 | Deep space | 1972→ | First probe to Jupiter, now leaving the solar system, carries a plaque for whoever finds it |
 
 Left out for now (could be stretch goals): InSight, Phoenix, Spirit, Viking 2, Dawn, NEAR Shoemaker, Kepler, Pioneer 11.
-- **D4:** blank for now.
+- **D4:** **Beyond the Void** (decided 2026-11-14).
 
 Everything below is the build structure that holds whatever story you choose.
 

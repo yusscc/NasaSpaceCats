@@ -5,10 +5,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="generator" content="SI-assisted code: Claude (Anthropic)">
-<title>Abandoned but not Forgotten</title>
+<title>Beyond the Void</title>
 <meta name="description" content="Fly to the Moon and Mars and meet the machines NASA left behind: where they are, what they did, and how we can still see them today.">
 <link rel="icon" href="assets/icons/moon.jpg">
-<meta property="og:title" content="Abandoned but not Forgotten">
+<meta property="og:title" content="Beyond the Void">
 <meta property="og:description" content="Fly to the Moon and Mars and meet the machines NASA left behind.">
 <meta property="og:image" content="assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -30,7 +30,7 @@
   </div>
   <div class="progress" aria-hidden="true"><div id="progress-bar"></div></div>
   <header class="topbar">
-    <h1>Abandoned <span>but not</span> Forgotten</h1>
+    <h1>Beyond <span>the</span> Void</h1>
     <button id="skip" class="pill story-only">Explore freely →</button>
     <nav class="worlds explore-only" aria-label="Choose a world">
       <button id="back-to-story" class="pill">↑ Story</button>
@@ -53,6 +53,15 @@
   </aside>
 
   <div id="flying" class="flying" hidden>Travelling…</div>
+
+  <section class="timeline explore-only" aria-label="Timeline">
+    <label for="year">Machines landed by <output id="year-out" for="year">2021</output></label>
+    <div class="track">
+      <input type="range" id="year" min="1967" max="2021" step="1" value="2021">
+      <div id="year-ticks" class="ticks"></div>
+    </div>
+    <p id="year-count" aria-live="polite"></p>
+  </section>
 
   <section id="panel" class="panel" aria-live="polite" hidden>
     <div class="panel-head">

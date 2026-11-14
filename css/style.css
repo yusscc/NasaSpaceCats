@@ -204,3 +204,21 @@ button { font: inherit; color: inherit; cursor: pointer; }
 #loading-bar { width: 0; height: 100%; background: var(--accent); transition: width .3s; }
 @media (prefers-reduced-motion: reduce) { .loading, #loading-bar { transition: none; } }
 @media (max-width: 760px) { .score { bottom: 24px; } }
+
+/* timeline scrubber (explore mode) */
+.timeline { position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%); width: min(560px, calc(100% - 32px)); background: var(--glass); border: 1px solid var(--line); border-radius: 14px; padding: 10px 16px 8px; z-index: 4; backdrop-filter: blur(6px); font-size: 13px; color: var(--muted); }
+.timeline output { font-family: var(--display); font-size: 18px; color: var(--accent); margin-left: 4px; }
+.timeline .track { position: relative; padding-bottom: 18px; }
+.timeline input { width: 100%; margin: 6px 0 0; accent-color: var(--accent); }
+.ticks { position: absolute; left: 8px; right: 8px; bottom: 0; height: 16px; }
+.ticks button { position: absolute; transform: translateX(-50%); background: none; border: 0; padding: 0 2px; font-size: 11px; color: var(--muted); }
+.ticks button.on { color: var(--text); }
+.ticks button:hover { color: var(--accent); }
+#year-count { margin: 2px 0 0; }
+@media (max-width: 760px) {
+  .timeline { bottom: 52px; padding: 8px 12px 6px; }
+  .timeline .track { padding-bottom: 32px; }
+  .ticks { bottom: 14px; }
+  .ticks button:nth-child(even) { top: 14px; } /* stagger labels so close years do not overlap */
+  .list { bottom: 222px; max-height: 24vh; }
+}

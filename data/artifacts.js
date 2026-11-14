@@ -1,5 +1,5 @@
 // SI-assisted data: compiled with Claude (Anthropic) from the NASA/NSSDCA sources listed in each entry.
-// Every fact must be checked by a person against its sources before submission.
+// Facts cross-checked by Claude on 2026-11-14 against NASA, NSSDCA, JPL and HiRISE pages; the team does the final check.
 // Coordinates: degrees, lat N+ / S-, lon E+ / W-. `story` and `video` are filled in by the team.
 
 // Solar system layout. Sizes and distances are NOT to scale (real distances would make planets invisible dots).
@@ -26,7 +26,7 @@ export const worlds = {
 // 'overview' | 'earth' | 'world:<moon|mars>' | 'artifact:<id>' | 'transit'.
 // Connective text is a factual draft. The team can rewrite it in their own voice.
 export const storyChapters = [
-  { shot: 'overview', kind: 'intro', title: 'Abandoned but not Forgotten', text: 'Scroll to travel to the machines NASA left behind on the Moon and Mars.' },
+  { shot: 'overview', kind: 'intro', title: 'Beyond the Void', text: 'Scroll to travel to the machines NASA left behind on the Moon and Mars.' },
   { shot: 'earth', title: 'It started here', text: 'Since the 1960s, NASA has sent robots and astronauts across the solar system. When their missions ended, much of their hardware stayed behind.' },
   { shot: 'world:moon', title: 'The Moon', text: 'About 384,000 km from Earth. Our first stop: three machines are waiting here.' },
   { shot: 'artifact:surveyor-3' },
@@ -113,7 +113,7 @@ export const artifacts = [
     ],
   },
   {
-    id: 'sojourner', orbit: { src: 'assets/orbit/sojourner.jpg', caption: "From orbit, 2007: HiRISE spots the Mars Pathfinder lander (MPF), Sojourner's base, with its backshell and parachute to the south. Photo: NASA/JPL/University of Arizona" }, world: 'mars', name: 'Sojourner Rover', type: 'Robotic rover',
+    id: 'sojourner', orbit: { src: 'assets/orbit/sojourner.jpg', caption: "From orbit, 21 Dec 2006: HiRISE spots the Mars Pathfinder lander (MPF), Sojourner's base, with its backshell and parachute to the south. Photo: NASA/JPL/University of Arizona" }, world: 'mars', name: 'Sojourner Rover', type: 'Robotic rover',
     lat: 19.13, lon: -33.22, place: 'Ares Vallis',
     launched: '4 Dec 1996', landed: '4 Jul 1997', lastContact: '27 Sep 1997', mass: '10.6 kg',
     status: 'Silent, parked near the Pathfinder lander.', statusKind: 'silent',
@@ -144,7 +144,7 @@ export const artifacts = [
   },
   {
     id: 'ingenuity', orbit: { src: 'assets/orbit/ingenuity.jpg', caption: "From orbit, 26 Feb 2022: HiRISE spots Ingenuity (red circle) on the floor of Jezero Crater. Photo: NASA/JPL-Caltech/University of Arizona" }, model: 'assets/models/ingenuity.glb', world: 'mars', name: 'Ingenuity Helicopter', type: 'Robotic helicopter',
-    lat: 18.4447, lon: 77.4508, place: 'Jezero Crater (near the Perseverance landing site)',
+    lat: 18.4447, lon: 77.4508, place: 'Jezero Crater (marker: where it landed with Perseverance; its last airfield, nicknamed "Valinor Hills", is elsewhere in the crater)',
     launched: '30 Jul 2020', landed: '18 Feb 2021', lastContact: 'Mission ended 25 Jan 2024', mass: '1.8 kg',
     status: 'Grounded after rotor damage on its 72nd flight.', statusKind: 'silent',
     builtTo: 'Show that powered, controlled flight is possible in the very thin air of Mars, which is about 1% as thick as Earth\'s.',

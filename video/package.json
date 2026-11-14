@@ -6,7 +6,7 @@
     "studio": "remotion studio src/index.jsx",
     "render": "remotion render src/index.jsx Apollo11 out/apollo-11-eagle.mp4 --codec=h264 --crf=28 --metadata=\"comment=SI disclosure: narration is AI text-to-speech (Microsoft Edge neural voice en-US-AriaNeural); video built with SI-written Remotion code (Claude). Photos: NASA, public domain.\" --metadata=\"title=Apollo 11 - Eagle\"",
     "capture": "node capture.mjs",
-    "render:demo": "remotion render src/index.jsx Demo out/demo.mp4 --codec=h264 --crf=28 --metadata=\"comment=SI disclosure: narration is AI text-to-speech (Microsoft Edge neural voice en-US-AriaNeural); video built with SI-written Remotion code (Claude). Screenshots of the team's site; NASA photos and 3D models are public domain / NASA 3D Resources.\" --metadata=\"title=Abandoned but not Forgotten - demo\""
+    "render:demo": "remotion render src/index.jsx Demo out/demo.mp4 --codec=h264 --crf=28 --metadata=\"comment=SI disclosure: narration is AI text-to-speech (Microsoft Edge neural voice en-US-AriaNeural); video built with SI-written Remotion code (Claude). Screenshots of the team's site; NASA photos and 3D models are public domain / NASA 3D Resources.\" --metadata=\"title=Beyond the Void - demo\""
   },
   "dependencies": {
     "@remotion/cli": "4.0.528",

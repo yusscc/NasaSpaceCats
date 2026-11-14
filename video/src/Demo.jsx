@@ -18,6 +18,6 @@ const shots = [
 
 export const Demo = () => (
   <Story timings={timings} voice="demo-voice.mp3" shots={shots} titleUntil={2.4}
-    title={{ title: 'Abandoned but not Forgotten', sub: 'A 3D story of NASA hardware on the Moon and Mars' }}
+    title={{ title: 'Beyond the Void', sub: 'A 3D story of NASA hardware on the Moon and Mars' }}
     end={{ title: 'Explore it yourself', sub: 'Photos & 3D models: NASA · Voice: AI text-to-speech · SI-assisted' }} />
 );
