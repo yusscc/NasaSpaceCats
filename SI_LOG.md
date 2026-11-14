@@ -21,6 +21,7 @@ Required by NASA Space Apps 2026: every project must describe how SI tools were 
 | 2026-11-14 | Claude (Anthropic) | Found NASA orbiter photos (LRO, HiRISE) of each landing site, wrote their captions and built the landing-vs-orbit slider | `assets/orbit/`, `data/artifacts.js` (`orbit`), `js/app.js`, `css/style.css` | Captions cross-checked against HiRISE/LROC pages by Claude. **TODO: team does a final read** |
 | 2026-11-14 | Claude (Anthropic) | Found NASA's own 3D models (NASA 3D Resources) and wrote the code that stands them on the surface in close-ups | `assets/models/`, `js/app.js` | Team reviews in browser |
 | 2026-11-14 | Claude (Anthropic) | Searched for and selected public-domain / CC BY textures and icons | `assets/` (credits in README and the site's "Image credits") | Team approved |
+| 2026-11-14 | Claude (Anthropic) + Microsoft Edge neural text-to-speech | At the team's request, fixed two facts in team narration (Apollo 11: "stay on" → "walk on" the surface for 2.5 h; Apollo 15: "using" → "bringing" a collapsible car), re-voiced and re-rendered both videos; hid planet labels behind the title screens | `videos/apollo-11-eagle.*`, `videos/apollo-15-lrv.*`, `js/app.js`, `css/style.css` | Team approved the wording |
 
 ## Not SI-generated
 - The project idea and narrative concept (team)
