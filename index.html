@@ -1,0 +1,53 @@
+<!doctype html>
+<!-- SI-generated code: written with Claude (Anthropic). Disclosed per NASA Space Apps 2026 SI rules. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="SI-assisted code: Claude (Anthropic)">
+<title>Abandoned but not Forgotten</title>
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>Abandoned <span>but not</span> Forgotten</h1>
+    <nav class="worlds" aria-label="Choose a world">
+      <button data-world="moon" aria-pressed="true"><img alt="" width="28" height="28"> Moon</button>
+      <button data-world="mars" aria-pressed="false"><img alt="" width="28" height="28"> Mars</button>
+    </nav>
+  </header>
+
+  <aside class="list" id="list" aria-label="Artifacts on this world">
+    <button class="list-head" id="list-toggle" aria-expanded="true" aria-controls="list-content">
+      <h2 id="list-title">The Moon</h2><span class="chev" aria-hidden="true">▾</span>
+    </button>
+    <div id="list-content">
+      <ul id="artifact-list"></ul>
+      <p class="hint">Drag to spin · scroll out to see the solar system · click a glowing marker</p>
+    </div>
+  </aside>
+
+  <div id="flying" class="flying" hidden>Travelling…</div>
+
+  <section id="panel" class="panel" aria-live="polite" hidden>
+    <div class="panel-head">
+      <div id="panel-title"></div>
+      <div class="panel-btns">
+        <button id="fold" aria-expanded="true" aria-controls="panel-body" aria-label="Fold details"><span aria-hidden="true">▾</span></button>
+        <button id="close" aria-label="Close details">✕</button>
+      </div>
+    </div>
+    <div id="panel-body"></div>
+  </section>
+
+  <footer class="si">Sizes &amp; distances not to scale · SI-assisted code &amp; data (Claude) · <button id="credits-btn" class="link">Image credits</button></footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
