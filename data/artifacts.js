@@ -111,7 +111,7 @@ export const artifacts = [
     didYouKnow: 'Viking 1 kept working for over six years, far beyond its planned 90 days.',
     size: { h: 2, w: 3, label: 'about 2 m tall and 3 m across' },
     photo: 'assets/photos/viking-1.jpg', photoCaption: 'A Viking lander test model on Earth. Photo: NASA',
-    story: '', video: 'videos/viking-1.mp4',
+    story: "Viking 1 was expected to work for 90 days but managed to be in operation for six and a half years sending the first ever color pictures of the Martian landscape. This mission was to find evidence of life, but, rather, raised a mystery. The research started by Viking 1 is ongoing until now.", video: 'videos/viking-1.mp4',
     sources: [
       { label: 'NSSDCA: Viking 1 Lander', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1975-075C' },
       { label: 'NASA Science: Viking 1', url: 'https://science.nasa.gov/mission/viking-1/' },
@@ -127,7 +127,7 @@ export const artifacts = [
     didYouKnow: 'Sojourner is about the size of a microwave oven. It was planned to work for 7 days and kept going for about 12 weeks.',
     size: { h: 0.3, w: 0.65, label: '65 cm long and 30 cm tall, about the size of a microwave oven' },
     photo: 'assets/photos/sojourner.jpg', photoCaption: 'Sojourner next to a rock, seen from the Pathfinder lander, 1997. Photo: NASA/JPL',
-    story: '', video: 'videos/sojourner.mp4',
+    story: "The size of Sojourner rover was roughly comparable to a size of microwave oven, and the mission period – one week. However, the machine lasted for twelve weeks proving that wheeled vehicles could successfully travel on the surface of the red planet. All other Mars rovers were developed based on Sojourner's experience.", video: 'videos/sojourner.mp4',
     sources: [
       { label: 'NASA Science: Mars Pathfinder', url: 'https://science.nasa.gov/mission/mars-pathfinder/' },
       { label: 'NSSDCA: Mars Pathfinder', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1996-068A' },
@@ -143,7 +143,7 @@ export const artifacts = [
     didYouKnow: 'Opportunity was planned to work for 90 Martian days. It lasted almost 15 years.',
     size: { h: 1.5, w: 2.3, label: 'about 1.5 m tall, 2.3 m wide and 1.6 m long, like a golf cart' },
     photo: 'assets/photos/opportunity.jpg', photoCaption: "Artist's illustration of a Mars Exploration Rover like Opportunity. Image: NASA/JPL",
-    story: '', video: 'videos/opportunity.mp4',
+    story: "Opportunity rover was supposed to run during 90 sols (Martian days), but managed to live for 15 years. Its major discoveries included tiny spheroid formations called “blueberries” and rocks which could have been created in liquid medium. In 2018 the planet got wrapped into a planet-wide dust storm, which led to the death of the rover.", video: 'videos/opportunity.mp4',
     sources: [
       { label: 'NASA Science: Spirit & Opportunity', url: 'https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/' },
       { label: 'NSSDCA: Opportunity', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2003-032A' },
@@ -159,7 +159,7 @@ export const artifacts = [
     didYouKnow: 'Ingenuity was planned for just 5 test flights. It flew 72.',
     size: { h: 0.49, w: 1.2, label: '49 cm tall; its rotor blades are 1.2 m across' },
     photo: 'assets/photos/ingenuity.jpg', photoCaption: 'Ingenuity on Mars, photographed by Perseverance, April 2021. Photo: NASA/JPL-Caltech',
-    story: '', video: 'videos/ingenuity.mp4',
+    story: "This helicopter weighs 1.8 kg and successfully performed its first-ever flight in the atmosphere about 1% denser than Earth's atmosphere. Designed initially for 5 flights Ingenuity conducted 72 flights before being damaged during its last one. The helicopter is grounded at Jezero crater.", video: 'videos/ingenuity.mp4',
     sources: [
       { label: 'NASA Science: Ingenuity Mars Helicopter', url: 'https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/' },
       { label: 'NSSDCA: Mars 2020', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2020-052A' },
