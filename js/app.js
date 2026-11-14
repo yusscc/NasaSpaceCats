@@ -291,7 +291,15 @@ function openPanel(a) {
   const lat = `${Math.abs(a.lat).toFixed(2)}°${a.lat >= 0 ? 'N' : 'S'}`, lon = `${Math.abs(a.lon).toFixed(2)}°${a.lon >= 0 ? 'E' : 'W'}`;
   showPanel(`<div class="type">${worlds[a.world].name} · ${a.type}</div><h2>${a.name}</h2>`, `
     <span class="badge ${a.statusKind === 'active' ? 'active' : ''}">${a.status}</span>
-    <figure class="photo"><img src="${a.photo}" alt="${a.photoCaption}"><figcaption>${a.photoCaption}</figcaption></figure>
+    ${a.orbit ? `<figure class="compare">
+      <div class="compare-box" style="--pos:50%">
+        <img src="${a.photo}" alt="${a.photoCaption}">
+        <img class="after" src="${a.orbit.src}" alt="${a.orbit.caption}">
+        <span class="tag">Landing</span><span class="tag right">From orbit</span>
+        <input type="range" min="0" max="100" value="50" aria-label="Slide between the landing photo and the view from orbit">
+      </div>
+      <figcaption>${a.photoCaption}<br>${a.orbit.caption}</figcaption>
+    </figure>` : `<figure class="photo"><img src="${a.photo}" alt="${a.photoCaption}"><figcaption>${a.photoCaption}</figcaption></figure>`}
     <div class="video">${videoHtml(a.video)}</div>${a.video && !/youtu/.test(a.video) ? '<p class="si-note">Narration: AI text-to-speech voice · video assembled with SI-written code</p>' : ''}
     <h3>Story</h3>
     <p class="story ${a.story ? '' : 'empty'}">${a.story || 'Story and narration coming soon.'}</p>
@@ -312,6 +320,11 @@ function openPanel(a) {
     <h3>Sources</h3>
     <ul class="sources">${a.sources.map(s => `<li><a href="${s.url}" target="_blank" rel="noopener">${s.label}</a></li>`).join('')}</ul>`);
 }
+
+// then-vs-now slider: the range input moves the wipe line
+$('panel-body').addEventListener('input', e => {
+  if (e.target.matches('.compare input')) e.target.parentElement.style.setProperty('--pos', `${e.target.value}%`);
+});
 
 function showPanel(titleHtml, bodyHtml) {
   $('panel-title').innerHTML = titleHtml;

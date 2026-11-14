@@ -47,12 +47,13 @@ export const credits = [
   'Sun, planets, Saturn rings, star background: Solar System Scope (CC BY 4.0), via Wikimedia Commons',
   'Artifact photos: NASA / NASA-JPL (public domain), via Wikimedia Commons',
   'Button icons: NASA LRO Moon nearside and NASA Viking Mars mosaic (public domain), via Wikimedia Commons',
+  'Orbit photos: NASA Lunar Reconnaissance Orbiter (NASA/GSFC/Arizona State University) and Mars Reconnaissance Orbiter HiRISE (NASA/JPL/University of Arizona), public domain, via Wikimedia Commons',
   '3D models (Apollo Lunar Module, Viking Lander, Opportunity rover, Ingenuity helicopter): NASA 3D Resources (free to use), github.com/nasa/NASA-3D-Resources. Shown much larger than real scale.',
 ];
 
 export const artifacts = [
   {
-    id: 'surveyor-3', world: 'moon', name: 'Surveyor 3', type: 'Robotic lander',
+    id: 'surveyor-3', orbit: { src: 'assets/orbit/surveyor-3.jpg', caption: "From orbit, 2011: the Lunar Reconnaissance Orbiter (LRO) sees the Apollo 12 site. Surveyor 3 sits on the rim of Surveyor Crater, with the astronauts' footpaths still visible. Photo: NASA/GSFC/Arizona State University" }, world: 'moon', name: 'Surveyor 3', type: 'Robotic lander',
     lat: -3.0161, lon: -23.4179, place: 'Oceanus Procellarum (Ocean of Storms)',
     launched: '17 Apr 1967', landed: '20 Apr 1967', lastContact: '4 May 1967', mass: '≈ 300 kg at landing',
     status: 'Silent. Some parts were taken home by Apollo 12.', statusKind: 'silent',
@@ -67,7 +68,7 @@ export const artifacts = [
     ],
   },
   {
-    id: 'apollo-11-eagle', model: 'assets/models/apollo-lm.glb', modelKeepBelow: 0.5, world: 'moon', name: 'Apollo 11 – Eagle descent stage', type: 'Crewed lander + experiments',
+    id: 'apollo-11-eagle', orbit: { src: 'assets/orbit/apollo-11-eagle.jpg', caption: "From orbit, 2012: LRO sees Eagle's descent stage (LM), the laser mirror (LRRR), a discarded cover and the astronauts' footpaths. Photo: NASA/GSFC/Arizona State University" }, model: 'assets/models/apollo-lm.glb', modelKeepBelow: 0.5, world: 'moon', name: 'Apollo 11 – Eagle descent stage', type: 'Crewed lander + experiments',
     lat: 0.6742, lon: 23.4731, place: 'Mare Tranquillitatis (Sea of Tranquility)',
     launched: '16 Jul 1969', landed: '20 Jul 1969', lastContact: 'Descent stage: none after liftoff. Laser mirror: still in use', mass: '≈ 2,000 kg descent stage (dry)',
     status: 'Descent stage silent. The laser mirror left beside it still works today.', statusKind: 'active',
@@ -82,7 +83,7 @@ export const artifacts = [
     ],
   },
   {
-    id: 'apollo-15-lrv', world: 'moon', name: 'Apollo 15 – Lunar Roving Vehicle', type: 'Crewed electric rover',
+    id: 'apollo-15-lrv', orbit: { src: 'assets/orbit/apollo-15-lrv.jpg', caption: "From orbit, 2011: LRO spots the LM descent stage and the parked Lunar Roving Vehicle (LRV) near Last Crater. Photo: NASA/GSFC/Arizona State University" }, world: 'moon', name: 'Apollo 15 – Lunar Roving Vehicle', type: 'Crewed electric rover',
     lat: 26.1322, lon: 3.6339, place: 'Hadley–Apennine region',
     launched: '26 Jul 1971', landed: '30 Jul 1971', lastContact: 'Parked on 2 Aug 1971', mass: '≈ 210 kg (Earth weight)',
     status: 'Parked for good near the landing site.', statusKind: 'silent',
@@ -97,7 +98,7 @@ export const artifacts = [
     ],
   },
   {
-    id: 'viking-1', model: 'assets/models/viking.glb', world: 'mars', name: 'Viking 1 Lander', type: 'Robotic lander',
+    id: 'viking-1', orbit: { src: 'assets/orbit/viking-1.jpg', caption: "From orbit, 2006: the HiRISE camera on Mars Reconnaissance Orbiter finds Viking 1, the bright dot in the middle. Photo: NASA/JPL/University of Arizona" }, model: 'assets/models/viking.glb', world: 'mars', name: 'Viking 1 Lander', type: 'Robotic lander',
     lat: 22.27, lon: -47.95, place: 'Chryse Planitia',
     launched: '20 Aug 1975', landed: '20 Jul 1976', lastContact: 'Nov 1982', mass: '≈ 600 kg at landing',
     status: 'Silent since 1982.', statusKind: 'silent',
@@ -112,7 +113,7 @@ export const artifacts = [
     ],
   },
   {
-    id: 'sojourner', world: 'mars', name: 'Sojourner Rover', type: 'Robotic rover',
+    id: 'sojourner', orbit: { src: 'assets/orbit/sojourner.jpg', caption: "From orbit, 2007: HiRISE spots the Mars Pathfinder lander (MPF), Sojourner's base, with its backshell and parachute to the south. Photo: NASA/JPL/University of Arizona" }, world: 'mars', name: 'Sojourner Rover', type: 'Robotic rover',
     lat: 19.13, lon: -33.22, place: 'Ares Vallis',
     launched: '4 Dec 1996', landed: '4 Jul 1997', lastContact: '27 Sep 1997', mass: '10.6 kg',
     status: 'Silent, parked near the Pathfinder lander.', statusKind: 'silent',
@@ -127,7 +128,7 @@ export const artifacts = [
     ],
   },
   {
-    id: 'opportunity', model: 'assets/models/opportunity.glb', world: 'mars', name: 'Opportunity Rover', type: 'Robotic rover',
+    id: 'opportunity', orbit: { src: 'assets/orbit/opportunity.jpg', caption: "From orbit, 3 Oct 2006: HiRISE catches Opportunity on the rim of Victoria Crater. Its tracks and mast shadow are visible. Photo: NASA/JPL/University of Arizona" }, model: 'assets/models/opportunity.glb', world: 'mars', name: 'Opportunity Rover', type: 'Robotic rover',
     lat: -1.9462, lon: -5.5266, place: 'Meridiani Planum (landing site; it drove ≈ 45 km from here)',
     launched: '7 Jul 2003', landed: '25 Jan 2004', lastContact: '10 Jun 2018', mass: '≈ 185 kg',
     status: 'Silent since a planet-wide dust storm in 2018.', statusKind: 'silent',
@@ -142,7 +143,7 @@ export const artifacts = [
     ],
   },
   {
-    id: 'ingenuity', model: 'assets/models/ingenuity.glb', world: 'mars', name: 'Ingenuity Helicopter', type: 'Robotic helicopter',
+    id: 'ingenuity', orbit: { src: 'assets/orbit/ingenuity.jpg', caption: "From orbit, 26 Feb 2022: HiRISE spots Ingenuity (red circle) on the floor of Jezero Crater. Photo: NASA/JPL-Caltech/University of Arizona" }, model: 'assets/models/ingenuity.glb', world: 'mars', name: 'Ingenuity Helicopter', type: 'Robotic helicopter',
     lat: 18.4447, lon: 77.4508, place: 'Jezero Crater (near the Perseverance landing site)',
     launched: '30 Jul 2020', landed: '18 Feb 2021', lastContact: 'Mission ended 25 Jan 2024', mass: '1.8 kg',
     status: 'Grounded after rotor damage on its 72nd flight.', statusKind: 'silent',
