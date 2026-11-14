@@ -1,0 +1,18 @@
+Copyright (c) 2026 yusscc and the NasaSpaceCats team. All rights reserved.
+
+This repository is published for viewing and for judging in the NASA Space Apps
+Challenge 2026 only. No license is granted to copy, modify, distribute, sublicense,
+sell, or use this code, its content, or any part of it in other projects, for any
+purpose, without prior written permission from the copyright holders.
+
+Viewing the source on GitHub and forking it within GitHub are allowed only to the
+extent required by the GitHub Terms of Service. They grant no further rights.
+
+THIRD-PARTY MATERIAL IS NOT COVERED BY THIS NOTICE and stays under its own terms:
+- three.js (loaded from a CDN): MIT License, (c) three.js authors
+- Sun, planet, Saturn ring and star textures in assets/textures/: Solar System Scope, CC BY 4.0
+- Mars texture and button icons: NASA / USGS imagery, public domain
+- Moon texture: NASA imagery via the three.js examples
+- Facts and data from NASA (NSSDCA, NASA Science): public information, cited per artifact
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.

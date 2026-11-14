@@ -51,5 +51,8 @@ In `data/artifacts.js`, fill in the artifact's `story` text, and set `video` to 
 
 Sizes and distances in the 3D view are not to scale.
 
+## License
+© 2026 yusscc and the NasaSpaceCats team. **All rights reserved.** See [LICENSE](LICENSE). Third-party assets keep their own licenses.
+
 ## Use of Super Intelligence (SI)
 Code and data were written with help from Claude (Anthropic). The project idea and the stories are the team's own. Every SI-assisted file says so in its header. See [SI_LOG.md](SI_LOG.md) for details. NASA logos and branding are not used in any generated content.
