@@ -175,3 +175,23 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .compare-box input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
 .compare-box:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
 .compare figcaption { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.35; }
+
+/* explorer progress, quiz and badge */
+.score { position: fixed; left: 12px; bottom: 4px; z-index: 3; background: var(--glass); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 12px; color: var(--text); }
+.score:hover { border-color: var(--accent); }
+.quiz p { margin: 0 0 10px; }
+.quiz-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.quiz-options .pill { padding: 8px 18px; font-weight: 600; }
+.quiz-options .pill.right { background: var(--active); color: #04140c; border-color: var(--active); }
+.quiz-options .pill.wrong { border-color: #ff6b6b; color: #ff9b9b; }
+.quiz-options .pill:disabled { cursor: default; transform: none; }
+.quiz-feedback { min-height: 1.4em; margin-top: 8px !important; color: var(--muted); }
+.quiz-done { color: var(--active); margin: 0; }
+.award { width: min(440px, calc(100vw - 32px)); background: #0b0f1d; color: var(--text); border: 1px solid var(--line); border-radius: 16px; padding: 24px; text-align: center; }
+.award::backdrop { background: rgba(2, 4, 10, .7); }
+.award h2 { font-family: var(--display); margin: 4px 0 8px; }
+.award p { color: var(--muted); margin: 0 0 14px; }
+.award-icon { font-size: 52px; }
+.log { list-style: none; margin: 0 0 18px; padding: 0; text-align: left; font-size: 13px; }
+.log li { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.log li span:last-child { color: var(--muted); white-space: nowrap; }
