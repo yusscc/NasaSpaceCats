@@ -159,7 +159,7 @@ export const artifacts = [
     didYouKnow: 'Ingenuity was planned for just 5 test flights. It flew 72.',
     size: { h: 0.49, w: 1.2, label: '49 cm tall; its rotor blades are 1.2 m across' },
     photo: 'assets/photos/ingenuity.jpg', photoCaption: 'Ingenuity on Mars, photographed by Perseverance, April 2021. Photo: NASA/JPL-Caltech',
-    story: "This helicopter weighs 1.8 kg and successfully performed its first-ever flight in the atmosphere about 1% denser than Earth's atmosphere. Designed initially for 5 flights Ingenuity conducted 72 flights before being damaged during its last one. The helicopter is grounded at Jezero crater.", video: 'videos/ingenuity.mp4',
+    story: "This helicopter weighs 1.8 kg and successfully performed its first-ever flight in an atmosphere only about 1% as dense as Earth's. Designed initially for 5 flights Ingenuity conducted 72 flights before being damaged during its last one. The helicopter is grounded at Jezero crater.", video: 'videos/ingenuity.mp4',
     sources: [
       { label: 'NASA Science: Ingenuity Mars Helicopter', url: 'https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/' },
       { label: 'NSSDCA: Mars 2020', url: 'https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=2020-052A' },
