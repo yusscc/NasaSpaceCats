@@ -61,6 +61,7 @@ export const artifacts = [
     builtTo: 'Prove that a spacecraft could land softly on the Moon, and dig into the soil with a robotic scoop to test whether the ground could hold up a crewed Apollo lander.',
     learned: 'The lunar soil was firm enough to land on. Surveyor 3 was the first spacecraft to dig a trench on the Moon, and its camera sent back thousands of pictures.',
     didYouKnow: 'In November 1969 the Apollo 12 crew landed close by, walked over to Surveyor 3, and cut off its camera and other parts to bring back to Earth. It is the only time humans have visited a robot on another world.',
+    size: { h: 3, w: 4.3, label: 'about 3 m tall; its three legs span 4.3 m' },
     photo: 'assets/photos/surveyor-3.jpg', photoCaption: "Apollo 12's Pete Conrad visits Surveyor 3, November 1969. Photo: NASA",
     story: '', video: 'videos/surveyor-3.mp4',
     sources: [
@@ -76,6 +77,7 @@ export const artifacts = [
     builtTo: 'Land Neil Armstrong and Buzz Aldrin on the Moon, then serve as the launch pad for the upper stage that carried them back to orbit.',
     learned: 'The crew brought back about 21.5 kg of Moon rock and soil. The laser retroreflector they set up lets observatories on Earth measure the distance to the Moon to within centimetres, which showed that the Moon is slowly drifting away from Earth (about 3.8 cm per year).',
     didYouKnow: 'A metal plaque on one of Eagle\'s legs is still there. It says the explorers "came in peace for all mankind."',
+    size: { h: 3.2, w: 9.4, label: 'descent stage about 3.2 m tall; 9.4 m from footpad to footpad' },
     photo: 'assets/photos/apollo-11-eagle.jpg', photoCaption: 'Eagle on the Moon while Buzz Aldrin unpacks experiments, July 1969. Photo: NASA',
     story: '', video: 'videos/apollo-11-eagle.mp4',
     sources: [
@@ -91,6 +93,7 @@ export const artifacts = [
     builtTo: 'Let astronauts David Scott and James Irwin drive kilometres away from their lander and carry more tools and samples. It ran on batteries.',
     learned: 'The rover took the crew to the edge of Hadley Rille and the Apennine mountains, about 28 km of driving in total. There they found the "Genesis Rock", a piece of the Moon\'s ancient crust about 4 billion years old.',
     didYouKnow: 'The crew parked the rover with its TV camera pointing at the lander, so people on Earth could watch the astronauts lift off from the Moon.',
+    size: { h: 1.1, w: 3.1, label: 'about 3.1 m long and 1.1 m tall, like a small car' },
     photo: 'assets/photos/apollo-15-lrv.jpg', photoCaption: 'James Irwin with the lunar module and the rover, 1971. Photo: NASA',
     story: '', video: 'videos/apollo-15-lrv.mp4',
     sources: [
@@ -106,6 +109,7 @@ export const artifacts = [
     builtTo: 'Become the first US spacecraft to work on the surface of Mars: take pictures, measure the weather, and run three biology experiments that searched the soil for signs of life.',
     learned: 'Viking 1 sent back the first colour pictures from the surface of Mars and recorded Martian weather for more than six years. Its life experiments gave puzzling results. Most scientists concluded the soil chemistry, not life, explained them.',
     didYouKnow: 'Viking 1 kept working for over six years, far beyond its planned 90 days.',
+    size: { h: 2, w: 3, label: 'about 2 m tall and 3 m across' },
     photo: 'assets/photos/viking-1.jpg', photoCaption: 'A Viking lander test model on Earth. Photo: NASA',
     story: '', video: 'videos/viking-1.mp4',
     sources: [
@@ -121,6 +125,7 @@ export const artifacts = [
     builtTo: 'Test whether a small wheeled robot could drive on Mars, and measure what nearby rocks were made of.',
     learned: 'Sojourner studied the chemistry of Martian rocks and helped show that this area had been shaped by ancient floods. It proved rovers could work on Mars, paving the way for every rover since.',
     didYouKnow: 'Sojourner is about the size of a microwave oven. It was planned to work for 7 days and kept going for about 12 weeks.',
+    size: { h: 0.3, w: 0.65, label: '65 cm long and 30 cm tall, about the size of a microwave oven' },
     photo: 'assets/photos/sojourner.jpg', photoCaption: 'Sojourner next to a rock, seen from the Pathfinder lander, 1997. Photo: NASA/JPL',
     story: '', video: 'videos/sojourner.mp4',
     sources: [
@@ -136,6 +141,7 @@ export const artifacts = [
     builtTo: 'Search rocks and soil for clues about whether liquid water was ever present on Mars.',
     learned: 'Opportunity found tiny round minerals nicknamed "blueberries" and rocks that could only have formed in water. That was strong evidence Meridiani Planum was once wet. It drove about 45 km, a record for a vehicle on another world at the time.',
     didYouKnow: 'Opportunity was planned to work for 90 Martian days. It lasted almost 15 years.',
+    size: { h: 1.5, w: 2.3, label: 'about 1.5 m tall, 2.3 m wide and 1.6 m long, like a golf cart' },
     photo: 'assets/photos/opportunity.jpg', photoCaption: "Artist's illustration of a Mars Exploration Rover like Opportunity. Image: NASA/JPL",
     story: '', video: 'videos/opportunity.mp4',
     sources: [
@@ -151,6 +157,7 @@ export const artifacts = [
     builtTo: 'Show that powered, controlled flight is possible in the very thin air of Mars, which is about 1% as thick as Earth\'s.',
     learned: 'Ingenuity made the first powered flight on another planet on 19 April 2021. It went on to fly 72 times and scout routes for the Perseverance rover, showing that future missions can use aircraft to explore Mars.',
     didYouKnow: 'Ingenuity was planned for just 5 test flights. It flew 72.',
+    size: { h: 0.49, w: 1.2, label: '49 cm tall; its rotor blades are 1.2 m across' },
     photo: 'assets/photos/ingenuity.jpg', photoCaption: 'Ingenuity on Mars, photographed by Perseverance, April 2021. Photo: NASA/JPL-Caltech',
     story: '', video: 'videos/ingenuity.mp4',
     sources: [

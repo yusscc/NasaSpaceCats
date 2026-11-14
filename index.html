@@ -55,7 +55,8 @@
   <div id="flying" class="flying" hidden>Travelling…</div>
 
   <section class="timeline explore-only" aria-label="Timeline">
-    <label for="year">Machines landed by <output id="year-out" for="year">2021</output></label>
+    <div class="timeline-head"><label for="year">Machines landed by <output id="year-out" for="year">2021</output></label>
+      <button id="year-play" class="play" aria-label="Play the timeline">▶</button></div>
     <div class="track">
       <input type="range" id="year" min="1967" max="2021" step="1" value="2021">
       <div id="year-ticks" class="ticks"></div>

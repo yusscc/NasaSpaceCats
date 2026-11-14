@@ -289,8 +289,16 @@ function setYear(y) {
   if (selected && !shown(selected)) closePanel();
   if (current) renderList();
 }
-yr.addEventListener('input', () => setYear(yr.value));
-$('year-ticks').onclick = e => { const b = e.target.closest('button'); if (b) setYear(b.dataset.y); };
+let playing = null;
+function stopPlay() { clearInterval(playing); playing = null; $('year-play').textContent = '▶'; $('year-play').setAttribute('aria-label', 'Play the timeline'); }
+$('year-play').onclick = () => {
+  if (playing) return stopPlay();
+  if (untilYear >= +yr.max) setYear(yr.min);
+  $('year-play').textContent = '⏸'; $('year-play').setAttribute('aria-label', 'Pause the timeline');
+  playing = setInterval(() => (untilYear >= +yr.max ? stopPlay() : setYear(untilYear + 1)), 140);
+};
+yr.addEventListener('input', () => { stopPlay(); setYear(yr.value); });
+$('year-ticks').onclick = e => { const b = e.target.closest('button'); if (b) { stopPlay(); setYear(b.dataset.y); } };
 
 function renderList() {
   const ul = $('artifact-list');
@@ -341,7 +349,13 @@ function quizHtml(a) {
     <div class="quiz-options">${options.map(y => `<button class="pill" data-year="${y}">${y}</button>`).join('')}</div>
     <p class="quiz-feedback" aria-live="polite"></p></div>`;
 }
-$('panel-body').addEventListener('click', e => {
+$('panel-body').addEventListener('click', async e => {
+  const c = e.target.closest('[data-copy]');
+  if (c) {
+    try { await navigator.clipboard.writeText(location.href); c.textContent = 'Link copied ✓'; }
+    catch { c.textContent = location.href; } // clipboard blocked: show the link to copy by hand
+    return;
+  }
   const b = e.target.closest('.quiz button');
   if (!b) return;
   const quiz = b.closest('.quiz'), a = artifacts.find(x => x.id === quiz.dataset.id), right = +b.dataset.year === year(a);
@@ -382,8 +396,7 @@ function openPanel(a) {
       <figcaption>${a.photoCaption}<br>${a.orbit.caption}</figcaption>
     </figure>` : `<figure class="photo"><img src="${a.photo}" alt="${a.photoCaption}"><figcaption>${a.photoCaption}</figcaption></figure>`}
     <div class="video">${videoHtml(a.video)}</div>${a.video && !/youtu/.test(a.video) ? '<p class="si-note">Narration: AI text-to-speech voice · video assembled with SI-written code</p>' : ''}
-    <h3>Story</h3>
-    <p class="story ${a.story ? '' : 'empty'}">${a.story || 'Story and narration coming soon.'}</p>
+    ${a.story ? `<h3>Story</h3><p class="story">${a.story}</p>` : ''}
     <dl class="facts">
       <div><dt>Launched</dt><dd>${a.launched}</dd></div>
       <div><dt>Landed</dt><dd>${a.landed}</dd></div>
@@ -391,6 +404,7 @@ function openPanel(a) {
       <div><dt>Mass</dt><dd>${a.mass}</dd></div>
       <div class="wide"><dt>Location</dt><dd>${a.place}<br>${lat}, ${lon}</dd></div>
     </dl>
+    ${a.size ? sizeHtml(a) : ''}
     <h3>From engineering to discovery</h3>
     <div class="journey">
       <div><b>It was built to…</b>${a.builtTo}</div>
@@ -401,7 +415,28 @@ function openPanel(a) {
     <h3>Quick quiz</h3>
     ${quizHtml(a)}
     <h3>Sources</h3>
-    <ul class="sources">${a.sources.map(s => `<li><a href="${s.url}" target="_blank" rel="noopener">${s.label}</a></li>`).join('')}</ul>`);
+    <ul class="sources">${a.sources.map(s => `<li><a href="${s.url}" target="_blank" rel="noopener">${s.label}</a></li>`).join('')}</ul>
+    <button class="pill" data-copy>Copy a link to ${a.name}</button>`);
+  history.replaceState(null, '', `#${a.id}`); // shareable: opening this URL flies straight here
+}
+
+// to-scale drawing: the machine (height x widest side) next to a 1.7 m adult
+const PERSON = 1.7;
+function sizeHtml(a) {
+  const { h, w } = a.size, gap = 0.5;
+  const k = Math.min(110 / Math.max(h, PERSON), 300 / (w + gap + 0.5)); // px per metre: fits a 340 x 135 box
+  const W = Math.round((w + gap + 0.5) * k + 20), base = 125, P = PERSON * k, r = P * 0.09;
+  const cx = 10 + (w + gap) * k + r * 1.5, f = n => n.toFixed(1);
+  return `<h3>How big is it?</h3>
+    <figure class="size">
+      <svg viewBox="0 0 ${W} 135" role="img" aria-label="${a.name} is ${a.size.label}, drawn next to an adult 1.7 metres tall">
+        <line x1="0" x2="${W}" y1="${base}" y2="${base}" class="ground"/>
+        <rect x="10" y="${f(base - h * k)}" width="${f(w * k)}" height="${f(h * k)}" rx="3" class="machine"/>
+        <circle cx="${f(cx)}" cy="${f(base - P + r)}" r="${f(r)}" class="person"/>
+        <rect x="${f(cx - P * 0.1)}" y="${f(base - P + 2.2 * r)}" width="${f(P * 0.2)}" height="${f(P - 2.2 * r)}" rx="${f(P * 0.08)}" class="person"/>
+      </svg>
+      <figcaption>${a.size.label}. Drawn to scale next to an adult, 1.7 m tall.</figcaption>
+    </figure>`;
 }
 
 // then-vs-now slider: the range input moves the wipe line
@@ -430,6 +465,7 @@ document.querySelector('.panel-head').onclick = e => { if ($('panel').classList.
 
 function closePanel() {
   selected = null;
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
   $('panel').hidden = true;
   document.querySelectorAll('#artifact-list button').forEach(b => b.setAttribute('aria-current', false));
 }
@@ -543,7 +579,7 @@ function cardHtml(c, i) {
         <span class="chip ${live ? 'live' : 'silent'}">${live ? 'Still working' : 'Silent'}</span></div>
       <h2>${a.name}</h2><p class="lead">${a.story || a.learned}</p>
       <div class="dyk"><b>Did you know?</b>${a.didYouKnow}</div>
-      <div class="actions"><button class="pill primary" data-open="${a.id}">Read the full file →</button></div>`;
+      <div class="actions"><button class="pill primary" data-open="${a.id}">Read the full file →</button>${a.video ? `<button class="pill" data-play="${a.id}">▶ Watch the video</button>` : ''}</div>`;
   }
   if (c.kind === 'intro') return `<div class="kicker">NASA Space Apps 2026 · Abandoned but not Forgotten</div><h2>${c.title}</h2><p class="lead">${c.text}</p>
       <ul class="stats"><li><b>${artifacts.length}</b>machines</li><li><b>${Object.keys(worlds).length}</b>worlds</li><li><b>${Math.min(...years)}–${Math.max(...years)}</b>landings</li></ul>
@@ -561,6 +597,12 @@ $('story').addEventListener('click', e => {
   const b = e.target.closest('button');
   if (!b) return;
   if (b.dataset.open) openPanel(byId[b.dataset.open]);
+  if (b.dataset.play) {
+    openPanel(byId[b.dataset.play]);
+    const v = $('panel-body').querySelector('video');
+    v?.scrollIntoView({ block: 'center' });
+    v?.play().catch(() => {}); // a blocked autoplay just leaves the player ready
+  }
   if ('explore' in b.dataset) enterExplore();
   if ('top' in b.dataset) scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
 });
@@ -641,5 +683,13 @@ function enterStory() {
 
 $('skip').onclick = enterExplore;
 $('back-to-story').onclick = enterStory;
+// deep link: index.html#<artifact id> opens explore mode and flies to that machine
+const deep = byId[location.hash.slice(1)]; // read before enterStory(), whose closePanel() clears the hash
 setYear(untilYear);
 enterStory();
+if (deep) {
+  setWorld(deep.world);
+  enterExplore();
+  const go = () => (flight ? setTimeout(go, 250) : focusArtifact(deep));
+  go();
+}
